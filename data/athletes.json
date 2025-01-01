@@ -1,0 +1,408 @@
+{
+  "sEcho": 0,
+  "draw": 1,
+  "recordsTotal": 38535,
+  "recordsFiltered": 163,
+  "data": [
+    {
+      "TeamID": 132,
+      "EAN": 10000187461,
+      "Fullname": "Allibone Calvin Pieter",
+      "Birthdate": "16",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187460,
+      "Fullname": "Allibone Sophia Elizabeth",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000139238,
+      "Fullname": "Alt Adam",
+      "Birthdate": "15",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171272,
+      "Fullname": "Barcena Blažková Lorentzo",
+      "Birthdate": "15",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000168440,
+      "Fullname": "Barcena García Nero",
+      "Birthdate": "11",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000155974,
+      "Fullname": "Bártová Markéta",
+      "Birthdate": "16",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187402,
+      "Fullname": "Bauerová Lara",
+      "Birthdate": "15",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187592,
+      "Fullname": "Bavor Vilém",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000168436,
+      "Fullname": "Baxantová Eva",
+      "Birthdate": "09",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000139201,
+      "Fullname": "Becková Viktorie",
+      "Birthdate": "14",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187431,
+      "Fullname": "Beganyová Alma",
+      "Birthdate": "18",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187790,
+      "Fullname": "Benčič Peter",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000136995,
+      "Fullname": "Brejlová Anna",
+      "Birthdate": "10",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000168437,
+      "Fullname": "Bugáňová Karolína",
+      "Birthdate": "10",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000139202,
+      "Fullname": "Bumfrey Sebastian",
+      "Birthdate": "15",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000098840,
+      "Fullname": "Burianová Anežka",
+      "Birthdate": "09",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000159572,
+      "Fullname": "Čermáková Lea",
+      "Birthdate": "16",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000118120,
+      "Fullname": "Černá Veronika",
+      "Birthdate": "11",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000116478,
+      "Fullname": "Daczický Mikuláš",
+      "Birthdate": "13",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171275,
+      "Fullname": "Daníček Jakub",
+      "Birthdate": "16",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000155979,
+      "Fullname": "Darebníčková Tereza",
+      "Birthdate": "15",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187388,
+      "Fullname": "Děkanovská Stella Klára",
+      "Birthdate": "14",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000182281,
+      "Fullname": "Dírerová Diana",
+      "Birthdate": "12",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000147513,
+      "Fullname": "Dostálek Ondřej",
+      "Birthdate": "16",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187469,
+      "Fullname": "Drbohlav Adam",
+      "Birthdate": "18",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000030334,
+      "Fullname": "Dubová Sara Sofia",
+      "Birthdate": "12",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171529,
+      "Fullname": "Duchoň Jakub",
+      "Birthdate": "16",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000130048,
+      "Fullname": "Duchoňová Kateřina",
+      "Birthdate": "11",
+      "Registered": "31.12.2025",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171276,
+      "Fullname": "Dvořáková Jolana",
+      "Birthdate": "13",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000149381,
+      "Fullname": "Dvořáková Věra",
+      "Birthdate": "08",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187471,
+      "Fullname": "Engelmaier Leo",
+      "Birthdate": "15",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000155578,
+      "Fullname": "Ferbarová Eva",
+      "Birthdate": "14",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187791,
+      "Fullname": "Fillerová Veronika",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000164227,
+      "Fullname": "Hadrava Hynek",
+      "Birthdate": "12",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171277,
+      "Fullname": "Hadravová Hana",
+      "Birthdate": "16",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000034658,
+      "Fullname": "Hanáková Karolina",
+      "Birthdate": "76",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000168498,
+      "Fullname": "Havel Michael",
+      "Birthdate": "12",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171280,
+      "Fullname": "Hladík Adam",
+      "Birthdate": "14",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000101089,
+      "Fullname": "Hladíková Nela",
+      "Birthdate": "12",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187590,
+      "Fullname": "Holan Martin",
+      "Birthdate": "13",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000171281,
+      "Fullname": "Horáček Jakub",
+      "Birthdate": "14",
+      "Registered": "31.12.2028",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187389,
+      "Fullname": "Horáčková Eliška",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187497,
+      "Fullname": "Housková Julie",
+      "Birthdate": "14",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000139208,
+      "Fullname": "Hromek Denis",
+      "Birthdate": "12",
+      "Registered": "31.12.2026",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000099544,
+      "Fullname": "Hubálková Anna",
+      "Birthdate": "09",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000116481,
+      "Fullname": "Hubalová Adriana",
+      "Birthdate": "12",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187588,
+      "Fullname": "Chvojková Tereza",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000159126,
+      "Fullname": "Chvojková Zuzana",
+      "Birthdate": "14",
+      "Registered": "31.12.2027",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187792,
+      "Fullname": "Indra Albert",
+      "Birthdate": "17",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    },
+    {
+      "TeamID": 132,
+      "EAN": 10000187793,
+      "Fullname": "Indrová Alžběta Žofie",
+      "Birthdate": "15",
+      "Registered": "31.12.2029",
+      "Teamname": "ŠSK Újezd nad Lesy-Praha (UJPR9)"
+    }
+  ]
+}

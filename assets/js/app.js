@@ -5,6 +5,8 @@
 let steps = [];
 let currentStep = 0;
 
+import { verifyPhpScript } from './step1_input.js';
+
 function initializeSteps() {
     steps = Array.from(document.querySelectorAll('.step'));
     currentStep = 0;
@@ -30,4 +32,5 @@ document.addEventListener('DOMContentLoaded', () => {
     //todo: přidat logiku pro nepovolený JS -- ie asi odstranit hlašku js je vypnutý (zatím není)
     initializeSteps();
     showStep(0); // pro jistotu
+    window.verifyPhpScript = verifyPhpScript;
 });
