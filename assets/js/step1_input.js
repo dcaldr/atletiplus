@@ -1,4 +1,4 @@
-import {setSearchResults} from "./step2_selection";
+import {setSearchResults} from "./step2_selection.js";
 
 /**
  * testovací skript - php script output do konzole
@@ -113,10 +113,11 @@ export function generateYearOptions() {
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
 export function  firstStepBtnListener(){
+    event.preventDefault(); //todo:recheck
     validateFormInput();
    let teamname = document.querySelector('#teamName').value;
     let season = document.querySelector('#season').value;
-    searchPlease(season, teamname);
+    searchPlease(season, teamname).then(r => setSearchResults(r));
     return true;
 }
 
@@ -186,6 +187,7 @@ function validateFormInput() {
  */
 async function searchPlease(year, query) {
    const jsonData= await getSearchData(year, query);
+   console.log('jsondata:', typeof jsonData);
    return   setSearchResults(jsonData);
 }
 
@@ -193,7 +195,7 @@ async function searchPlease(year, query) {
  * Získá data z hledání a vrátí json?
  * @param yearC {string} ověřený rok
  * @param queryC {string} ověřený dotaz
- * @returns {Promise<{[key: string]: any} | null>} json data nebo null v případě chyby
+ * * @returns {Promise<string | null>} json data nebo null v případě chyby
  */
 function getSearchData(yearC, queryC){
     const url = 'backend/search.php';
@@ -210,7 +212,8 @@ function getSearchData(yearC, queryC){
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Response:', data);
+          //  console.log('Response:', data);
+            console.log('Response:', typeof data);
             return data;
         })
         .catch(error => {

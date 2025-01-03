@@ -49,4 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     addBasicListeners();
     window.verifyPhpScript = verifyPhpScript;
     window.verifyPhpInputs = verifyPhpInputs;
+    // put ujpr9 to nazev oddílu and 2024 to season
+     document.querySelector('#teamName').value = 'ujpr9';
+     document.querySelector('#season').value = '2024';
+     // buttonpress
+        document.querySelector('#nextStep1').click();
+
+
 });

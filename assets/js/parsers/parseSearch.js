@@ -1,15 +1,18 @@
 /**
  * Valdiuje že JSON odpovídá tomu co dále aplikace očekává
- * @param inJson
+ * @param {any} inJson -  JSON
  * @returns {boolean}
  * fixme: možná problém s chybějícím JSON.parse()
  * todo: přidat pokud jeden list kratší -- aby nedošlo k overflow
  * todo: zpracování chyb. zpráv z API
  */
-function validateSearchResults(inJson) {
-    //const json = JSON.parse(inJson); // tady možná nebude sedět
-   const json = inJson;
+export function  validateSearchResults(inJson) {
+    console.trace('validace');
+     // tady možná nebude sedět
+  const json = inJson;
     try {
+     //  const json = JSON.parse(inJson.toString());
+       console.warn(typeof json);
         const requiredKeys = ['sEcho', 'draw', 'recordsTotal', 'recordsFiltered', 'data'];
         const requiredDataKeys = ['TeamID', 'EAN', 'Fullname', 'Birthdate', 'Registered', 'Teamname'];
 
@@ -79,7 +82,10 @@ function keysInObject(obj, requiredKeys) {
     return true;
 }
 
-
+/**
+ * TODO: ODSTRANIT
+ * @returns {string}
+ */
 function debugLoad() {
   return "{\n" +
       "  \"sEcho\": 0,\n" +
@@ -492,6 +498,7 @@ function debugLoad() {
 }
 
 
- const aa = JSON.parse(debugLoad());
- validateSearchResults(aa);
- console.log('done');
+ //const aa = JSON.parse(debugLoad());
+ //    const aa = debugLoad();
+ // validateSearchResults(aa);
+ // console.log('done');
