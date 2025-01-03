@@ -3,6 +3,8 @@
  * @param inJson
  * @returns {boolean}
  * fixme: možná problém s chybějícím JSON.parse()
+ * todo: přidat pokud jeden list kratší -- aby nedošlo k overflow
+ * todo: zpracování chyb. zpráv z API
  */
 function validateSearchResults(inJson) {
     //const json = JSON.parse(inJson); // tady možná nebude sedět

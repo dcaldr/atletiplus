@@ -24,6 +24,13 @@ export function verifyPhpScript() {
         console.error('Error:', error);
     });
 }
+
+/**
+ * fce pro testování vstupu na php straně
+ * @param testquery - testovací dotaz
+ * @param testYear - testovací rok +-
+ * @returns {Promise<boolean>}
+ */
 export function verifyPhpInputs(testquery = "UJPR9", testYear = 2024) {
     const url = 'backend/search.php';
     const data = new URLSearchParams();
@@ -179,7 +186,7 @@ function validateFormInput() {
  */
 async function searchPlease(year, query) {
    const jsonData= await getSearchData(year, query);
-   setSearchResults(jsonData);
+   return   setSearchResults(jsonData);
 }
 
 /**
