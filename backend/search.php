@@ -5,10 +5,39 @@ header('Content-Type: application/json');
 // Získání vstupních dat z POST
 $year = $_POST['year'] ?? null;
 $query = $_POST['query'] ?? null;
+$test = $_POST['test'] ?? false;
 
 // Validace vstupů
-if (!$year || !$query) {
-    echo json_encode(['error' => 'Missing required parameters: year and query']);
+if (!$year) {
+    echo json_encode(['error' => 'year : missing']);
+    exit;
+}
+if (!$query) {
+    echo json_encode(['error' => 'query : missing']);
+    exit;
+}
+
+// validace správnosti vstupů
+if (!is_numeric($year)){
+    echo json_encode(['error' => 'year : NaN']);
+    exit;
+} else {
+    $year = (int) $year;
+    // aspoň rok 2003 - současný rok
+    if ($year < 2003 || $year > date('Y')) {
+        echo json_encode(['error' => 'year : out of range']);
+        exit;
+    }
+}
+
+// povolené znaky
+if (!filter_var($query, FILTER_VALIDATE_REGEXP, ["options" => ["regexp" => "/^[\p{L}\p{N}\s\-]+$/u"]])) {
+    echo json_encode(['error' => 'query : invalid']);
+    exit;
+}
+/// pokud jen testování vstupů - vypíše testovací režim a stop
+if ($test) {
+    echo json_encode(['ok' => 'Test mode successful']);
     exit;
 }
 
@@ -44,16 +73,16 @@ $headers = [
 
 // Inicializace cURL
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_URL, $url); // atletika.cz
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // zabalení do stringu?
+curl_setopt($ch, CURLOPT_POST, true); // požije POST na atletika.cz
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); // nasáčkuje data requestu
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); // hlavička
 
-// Odeslání požadavku
-$response = curl_exec($ch);
+// Odeslání požadavku na server
+$response = curl_exec($ch); // doopravdy pošle
 
-// Kontrola na chyby
+// Kontrola na chyby -- čistě transitu
 if (curl_errno($ch)) {
     echo json_encode(['error' => curl_error($ch)]);
 } else {

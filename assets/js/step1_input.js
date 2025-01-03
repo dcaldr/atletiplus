@@ -3,7 +3,7 @@
  */
 export function verifyPhpScript() {
     const url = 'backend/search.php';
-    const data = new URLSearchParams(); // pero query to asi jde taky
+    const data = new URLSearchParams();
     data.append('year', '2024');
     data.append('query', 'šsk újezd nad lesy');
 
@@ -20,6 +20,41 @@ export function verifyPhpScript() {
     })
     .catch(error => {
         console.error('Error:', error);
+    });
+}
+export function verifyPhpInputs(testquery = "UJPR9", testYear = 2024) {
+    const url = 'backend/search.php';
+    const data = new URLSearchParams();
+    data.append('year', testYear.toString());
+    data.append('query', testquery.toString());
+    data.append('test', true.toString());
+
+    return fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            console.error('Error:', data.error);
+            return false;
+        } else if (data.ok) {
+            console.log('OK:', data.ok);
+            return true;
+        } else {
+            console.log('Response:', data);
+            return false;
+        }
+    })
+    .catch(error => {
+        console.error('Inner Error:', error);
+        return false;
+    })
+    .then(result => {
+        return result;
     });
 }
 

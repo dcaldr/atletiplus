@@ -7,7 +7,7 @@ let currentStep = 0;
 
 
 
-import { verifyPhpScript } from './step1_input.js'; // debug fce
+import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
 import { generateYearOptions, firstStepBtnListen } from './step1_input.js';
 
 
@@ -48,4 +48,5 @@ document.addEventListener('DOMContentLoaded', () => {
     showStep(0); // pro jistotu
     addBasicListeners();
     window.verifyPhpScript = verifyPhpScript;
+    window.verifyPhpInputs = verifyPhpInputs;
 });
