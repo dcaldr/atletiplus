@@ -32,17 +32,22 @@
         <form id="teamForm">
           <div class="mb-3">
             <label for="teamName" class="form-label">Název oddílu</label>
-            <input type="text" class="form-control" id="teamName" placeholder="Např. ŠSK Újezd nad Lesy">
+            <input type="text" class="form-control" id="teamName" placeholder="Např. ŠSK Újezd nad Lesy nebo UJPR9"  required>
+            <div class="valid-feedback">V pořádku </div>
+            <div class="invalid-feedback">oddíl nesmí být prázdný, ani nesmí obsahovat nepovolené znaky</div>
+
           </div>
-          <div class="mb-3">
-            <label for="season" class="form-label">Sezóna</label>
-            <select class="form-select" id="season">
-              <!-- TODO: dynamicky generovat výběr (+najít min rok) -->
-              <option value="2024" selected>2024</option>
-              <option value="2023">2023</option>
-              <option value="2022">2022</option>
-            </select>
-          </div>
+        <div class="mb-3">
+  <label for="season" class="form-label">Sezóna</label>
+  <input list="seasons" class="form-control" id="season" placeholder="Vyberte sezónu" type="text" min="2003" required>
+          <div class="valid-feedback">V pořádku </div>
+            <div class="invalid-feedback">sezóna nesmí být prázdná a musí být rok 2003vč.- současný vč.</div>
+  <datalist id="seasons">
+    <option value=2025>
+    <option value=2024 selected>2024</option>
+    <option value=2003>
+  </datalist>
+</div>
           <button type="button" class="btn btn-primary" id="nextStep1">Další</button>
         </form>
       </div>
@@ -57,6 +62,7 @@
       </div>
       <div class="card-body">
         <ul class="list-group" id="athleteList">
+
           <!-- Dynamicky generovaný seznam -->
         </ul>
         <button type="button" class="btn btn-secondary mt-3" id="prevStep2">Zpět</button>

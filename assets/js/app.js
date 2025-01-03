@@ -5,7 +5,11 @@
 let steps = [];
 let currentStep = 0;
 
-import { verifyPhpScript } from './step1_input.js';
+
+
+import { verifyPhpScript } from './step1_input.js'; // debug fce
+import { generateYearOptions, firstStepBtnListen } from './step1_input.js';
+
 
 function initializeSteps() {
     steps = Array.from(document.querySelectorAll('.step'));
@@ -26,11 +30,22 @@ function showStep(index) {
 }
 
 /**
+ * připnutí základních tlačítek
+ */
+function addBasicListeners() {
+    document.querySelector('#nextStep1').addEventListener('click', firstStepBtnListen);
+}
+
+
+/**
  * Zpustí se až po načtení stránky
  */
 document.addEventListener('DOMContentLoaded', () => {
     //todo: přidat logiku pro nepovolený JS -- ie asi odstranit hlašku js je vypnutý (zatím není)
     initializeSteps();
+    // first step
+    generateYearOptions();
     showStep(0); // pro jistotu
+    addBasicListeners();
     window.verifyPhpScript = verifyPhpScript;
 });
