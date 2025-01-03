@@ -8,7 +8,7 @@ let currentStep = 0;
 
 
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
-import { generateYearOptions, firstStepBtnListen } from './step1_input.js';
+import { generateYearOptions, firstStepBtnListener } from './step1_input.js';
 
 
 function initializeSteps() {
@@ -33,7 +33,7 @@ function showStep(index) {
  * připnutí základních tlačítek
  */
 function addBasicListeners() {
-    document.querySelector('#nextStep1').addEventListener('click', firstStepBtnListen);
+    document.querySelector('#nextStep1').addEventListener('click', firstStepBtnListener);
 }
 
 

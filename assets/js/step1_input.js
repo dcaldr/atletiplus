@@ -1,3 +1,5 @@
+import {setSearchResults} from "./step2_selection";
+
 /**
  * testovací skript - php script output do konzole
  */
@@ -103,8 +105,11 @@ export function generateYearOptions() {
  * proběhne po zmáčknutí tlačítka další na prvním kroku
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
-export function  firstStepBtnListen(){
+export function  firstStepBtnListener(){
     validateFormInput();
+   let teamname = document.querySelector('#teamName').value;
+    let season = document.querySelector('#season').value;
+    searchPlease(season, teamname);
     return true;
 }
 
@@ -172,14 +177,16 @@ function validateFormInput() {
 /**
  * Vyvolá hledání, provede až po js kontrole vstupu (php dělá vlastní kontrolu)
  */
- function searchPlease(year, query) {
-
+async function searchPlease(year, query) {
+   const jsonData= await getSearchData(year, query);
+   setSearchResults(jsonData);
 }
 
 /**
  * Získá data z hledání a vrátí json?
  * @param yearC {string} ověřený rok
  * @param queryC {string} ověřený dotaz
+ * @returns {Promise<{[key: string]: any} | null>} json data nebo null v případě chyby
  */
 function getSearchData(yearC, queryC){
     const url = 'backend/search.php';
@@ -187,7 +194,7 @@ function getSearchData(yearC, queryC){
     data.append('year', yearC.toString());
     data.append('query', queryC.toString());
 
-    fetch(url, {
+    return  fetch(url, {
         method: 'POST',
         body: data,
         headers: {
@@ -201,8 +208,8 @@ function getSearchData(yearC, queryC){
         })
         .catch(error => {
             console.error('Error:', error);
+            return null;
         });
 }
 
 
-// verifyPhpScript();
