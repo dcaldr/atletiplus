@@ -1,31 +1,81 @@
 import {validateSearchResults} from "./parsers/parseSearch.js";
+import {manageAthletes} from "./Athlete.js";
 
 let inJson = null;
+let selectedYear = null;
+/**
+ * pole pro data tabulky
+ *
+ */
+let tableData = null;
 
 /**
  *
  *
  */
-export function setSearchResults(json) {
+export function setSearchResults(json, year) {
     console.log('setSearchResults called');
     if(json === null) {
-        console.error('Null v searchResults');
+        console.error('Null v searchResults json');
+        return false;
+    }
+    if(year === null){
+        console.error('Null v searchResults year');
         return false;
     }
     //todo: zkontroloat jestli odpovídá formátu
     let parseStatus;
+    console.log('první json');
+    console.log( json);
      parseStatus = validateSearchResults(json);
+     console.log('parseStatus po validate:', parseStatus);
+     console.log('json po validate:', json);
      if(parseStatus) {
          inJson = json;
+         selectedYear = year;
          console.log('----json je v pořádku*-- na konci');
+         tableData = manageAthletes(json,selectedYear);
          return true;
 
      }
     return false;
 }
 
+/**
+ * pracuje na zobrazení druhého kroku .. tedy tabulky
+ * čeká že inJson a selectedYear jsou naplněny už pomocí setSearchResults
+ * @returns {boolean}
+ */
+export function initializeStep2(){
+    console.log('initData called');
+    if(inJson === null){
+        console.error('initData: inJson  null');
+        return false;
+    }
+    if(selectedYear === null){
+        console.error('initData: selectedYear null');
+        return false;
+    }
+
+    putTableRows(tableData);
+    return true;
+
+
+}
 
 //// tabulky
+
+function putTableRows(tableData) {
+    const tableBody = document.getElementById('selectAthletes');
+    tableBody.innerHTML = '';
+    tableData.forEach(rowData => {
+        tableBody.insertAdjacentHTML('beforeend', rowData);
+    });
+}
+
+
+
+
 /**
  * hlídá mačkání sort tlačítek
  */
@@ -69,3 +119,4 @@ function sortListener() {
         });
     });
 }
+

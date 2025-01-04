@@ -112,19 +112,17 @@ export function generateYearOptions() {
  * proběhne po zmáčknutí tlačítka další na prvním kroku
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
-export function  firstStepBtnChecker(){
-    console.log('firstStepBtnListener called');
-   // event.preventDefault(); //todo:recheck
-    if(!validateFormInput()){
+export async function firstStepFormChecker() {
+    console.log('firstStepForm called');
+    // event.preventDefault(); //todo:recheck
+    if (!validateFormInput()) {
         console.error('validateFormInput failed');
         return false;
     }
-   let teamname = document.querySelector('#teamName').value;
+    let teamname = document.querySelector('#teamName').value;
     let season = document.querySelector('#season').value;
-    searchPlease(season, teamname).then(r => {
-    return r !== null && r;
-});
-    return true;
+    let answer = await searchPlease(season, teamname);
+    return answer;
 }
 
 /**
@@ -198,7 +196,7 @@ async function searchPlease(year, query) {
     console.log('searchPlease called');
    const jsonData= await getSearchData(year, query);
   // console.log('jsondata:', typeof jsonData);
-   return   setSearchResults(jsonData);
+   return   setSearchResults(jsonData, year);
 }
 
 /**
@@ -224,7 +222,7 @@ function getSearchData(yearC, queryC){
         .then(response => response.json()) //tady to už je json object
         .then(data => {
           //  console.log('Response:', data);
-            console.log('Response:', typeof data);
+            console.log('Response getSearchData end:', typeof data);
             return data;
         })
         .catch(error => {

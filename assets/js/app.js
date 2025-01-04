@@ -1,3 +1,5 @@
+
+
 /**
  * Pole všech dostupných kroků
 * @type {HTMLElement[]}
@@ -6,9 +8,9 @@ let steps = [];
 let currentStep = 0;
 
 
-
+import {initializeStep2} from "./step2_selection.js";
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
-import { generateYearOptions, firstStepBtnChecker } from './step1_input.js';
+import { generateYearOptions, firstStepFormChecker } from './step1_input.js';
 
 
 function initializeSteps() {
@@ -35,12 +37,17 @@ function showStep(index) {
 function addBasicListeners() {
     document.querySelector('#nextStep1').addEventListener('click', goToStep2Listener);
 }
-function goToStep2Listener(){
+ async function goToStep2Listener() {
     console.log('goToStep2Listener called');
-    if(firstStepBtnChecker()){
+     let [aa] = await Promise.all([firstStepFormChecker()]);
+    console.log('aa', aa);
+    if ( aa ) {
+        console.log('firstStepFormChecker passed');
+        initializeStep2();
         showStep(1);
-    }
-    else {
+
+
+    } else {
         console.error('Chyba v goToStep2 kroku');
     }
 }
@@ -63,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
      document.querySelector('#season').value = '2024';
      // buttonpress
         document.querySelector('#nextStep1').click();
+        console.log('nextStep2 clicked');
 
 
 });
