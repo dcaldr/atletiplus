@@ -113,11 +113,14 @@ export function generateYearOptions() {
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
 export function  firstStepBtnListener(){
-    event.preventDefault(); //todo:recheck
+    console.log('firstStepBtnListener called');
+   // event.preventDefault(); //todo:recheck
     validateFormInput();
    let teamname = document.querySelector('#teamName').value;
     let season = document.querySelector('#season').value;
-    searchPlease(season, teamname).then(r => setSearchResults(r));
+    searchPlease(season, teamname).then(r => {
+    return r !== null;
+});
     return true;
 }
 
@@ -128,7 +131,7 @@ export function  firstStepBtnListener(){
  * todo?? - přepsat na více znovupoužití -- jestli bude třeba??
  */
 function validateFormInput() {
-    console.log('clicked');
+    console.log('validate form clicked');
     const form = document.querySelector('#step1 form');
     const teamNameInput = document.querySelector('#teamName');
     const seasonInput = document.querySelector('#season');
@@ -186,8 +189,9 @@ function validateFormInput() {
  * Vyvolá hledání, provede až po js kontrole vstupu (php dělá vlastní kontrolu)
  */
 async function searchPlease(year, query) {
+    console.log('searchPlease called');
    const jsonData= await getSearchData(year, query);
-   console.log('jsondata:', typeof jsonData);
+  // console.log('jsondata:', typeof jsonData);
    return   setSearchResults(jsonData);
 }
 
@@ -195,9 +199,10 @@ async function searchPlease(year, query) {
  * Získá data z hledání a vrátí json?
  * @param yearC {string} ověřený rok
  * @param queryC {string} ověřený dotaz
- * * @returns {Promise<string | null>} json data nebo null v případě chyby
+ * * @returns {Promise<Object | null>} json data nebo null v případě chyby
  */
 function getSearchData(yearC, queryC){
+    console.log('getSearchData called');
     const url = 'backend/search.php';
     const data = new URLSearchParams(); // pero query to asi jde taky
     data.append('year', yearC.toString());
@@ -210,7 +215,7 @@ function getSearchData(yearC, queryC){
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
         }
     })
-        .then(response => response.json())
+        .then(response => response.json()) //tady to už je json object
         .then(data => {
           //  console.log('Response:', data);
             console.log('Response:', typeof data);

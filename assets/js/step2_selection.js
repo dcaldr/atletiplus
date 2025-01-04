@@ -7,6 +7,7 @@ let inJson = null;
  *
  */
 export function setSearchResults(json) {
+    console.log('setSearchResults called');
     if(json === null) {
         console.error('Null v searchResults');
         return false;

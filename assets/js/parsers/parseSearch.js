@@ -7,7 +7,7 @@
  * todo: zpracování chyb. zpráv z API
  */
 export function  validateSearchResults(inJson) {
-    console.trace('validace');
+    console.trace('validateSearchResults called');
      // tady možná nebude sedět
   const json = inJson;
     try {
