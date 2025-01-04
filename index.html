@@ -63,6 +63,7 @@
       </div>
       <div class="card-body">
         <!-- Tabulka -->
+        <!-- existuje i dataTables knihovna -->
         <div class="table-responsive">
           <table class="table table-striped table-hover" id="athleteTable">
             <thead>
@@ -96,29 +97,34 @@
               </th>
             </tr>
             </thead>
-            <tbody>
-            <!-- Data atletů budou dynamicky generována -->
+            <tbody id="selectAthletes">
+            <!-- Dynamicky generovaná data -->
             <tr>
               <td><input type="checkbox" class="athlete-checkbox" value="ean1"></td>
-              <td>Allibone Calvin</td>
-              <td>Junior</td>
-              <td>2006</td>
-              <td>ŠSK Újezd nad Lesy</td>
+              <td>Jméno 1</td>
+              <td>kategorie1</td>
+              <td>2003</td>
+              <td>oddíl1</td>
             </tr>
             <tr>
               <td><input type="checkbox" class="athlete-checkbox" value="ean2"></td>
-              <td>Alt Adam</td>
-              <td>Senior</td>
-              <td>2008</td>
-              <td>ŠSK Újezd nad Lesy</td>
+              <td>jméno2</td>
+              <td>kategorie2</td>
+              <td>2004</td>
+              <td>oddíl2</td>
             </tr>
             <!-- Další řádky -->
             </tbody>
           </table>
         </div>
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" class="btn btn-secondary" id="prevStep2">Zpět</button>
+          <button type="button" class="btn btn-primary" id="nextStep2">Další</button>
+        </div>
       </div>
     </div>
   </section>
+
 
 
 
