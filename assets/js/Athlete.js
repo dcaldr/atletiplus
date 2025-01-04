@@ -31,38 +31,47 @@ class Atlet {
 
 }
 function guessAgeCategory(birthYearTwoDigits, referenceYear) {
-    if (birthYearTwoDigits == null || referenceYear == null) {
-        throw new Error("Both birthYearTwoDigits and referenceYear are required.");
+    // Převod vstupů na čísla a kontrola
+    const by = parseInt(birthYearTwoDigits, 10);
+    const ry = parseInt(referenceYear, 10);
+    if (isNaN(by) || isNaN(ry)) {
+        throw new Error("birthYearTwoDigits i referenceYear musí být platná čísla.");
     }
 
-    // Určení celého roku narození
-    const century = Math.floor(referenceYear / 100); // Aktuální století (např. 20 pro roky 2000-2099)
-    const birthYear = birthYearTwoDigits <= referenceYear % 100
-        ? century * 100 + birthYearTwoDigits
-        : (century - 1) * 100 + birthYearTwoDigits; // v podstatě voodoo - pokud je někdo mladší než vybraný rok
-    // -> tak je vlastně z min století, tím pádem by to nemělo mít hromadu ifů
+    // Určení století (např. 20 pro roky 2000-2099)
+    const century = Math.floor(ry / 100);
+    // math voodoo :D
+    // Pokud je dvoučíslí větší než % 100 referenceYear, znamená to, že máme rok z předchozího století (19**),
+    // jinak z toho samého století (20**).
+    let birthYear;
+    if (by > ry % 100) {
+        birthYear = (century - 1) * 100 + by;
+    } else {
+        birthYear = century * 100 + by;
+    }
 
-    const age = referenceYear - birthYear;
+    // Věk
+    const age = ry - birthYear;
 
-    if (birthYear >= referenceYear - 11) {
+    // Rozdělení do kategorií podle věku
+    if (age <= 11) {
         return "Přípravka";
-    } else if (birthYear >= referenceYear - 13 && birthYear <= referenceYear - 12) {
+    } else if (age >= 12 && age <= 13) {
         return "Mladší žactvo";
-    } else if (birthYear >= referenceYear - 15 && birthYear <= referenceYear - 14) {
+    } else if (age >= 14 && age <= 15) {
         return "Starší žactvo";
-    } else if (birthYear >= referenceYear - 17 && birthYear <= referenceYear - 16) {
+    } else if (age >= 16 && age <= 17) {
         return "Dorost";
-    } else if (birthYear >= referenceYear - 19 && birthYear <= referenceYear - 18) {
+    } else if (age >= 18 && age <= 19) {
         return "Junioři/juniorky";
-    } else if (birthYear >= referenceYear - 22 && birthYear <= referenceYear - 20) {
+    } else if (age >= 20 && age <= 22) {
         return "Dospělí 20-22 let";
-    } else if (birthYear >= referenceYear - 34 && birthYear <= referenceYear - 23) {
-        return "Muži/ženy";
-    } else if (birthYear <= referenceYear - 35) {
+    } else if (age >= 23 && age <= 34) {
+        return "Dospělí";
+    } else if (age >= 35) {
         return "Veteráni";
     } else {
-        console.error(`Nepodařilo se určit kategorii věku pro rok ${referenceYear} a rok narození ${birthYear}`);
-        return "nezjištěná  kategorie";
+        return "nezjištěná kategorie";
     }
 }
 
