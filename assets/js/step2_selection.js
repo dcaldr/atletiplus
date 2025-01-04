@@ -58,6 +58,7 @@ export function initializeStep2(){
     }
 
     putTableRows(tableData);
+    sortListener();
     return true;
 
 
@@ -74,17 +75,50 @@ function putTableRows(tableData) {
 }
 
 
+function reorderTable(column, newOrder) {
+    console.log('reorderTable called');
+    // Get all table rows
+    const table = document.querySelector('#selectAthletes');
+    console.log('table', table);
+    const rows = Array.from(table.querySelectorAll('tr'));
+    console.log('rows', rows);
 
+    // Sort rows
+    rows.sort((a, b) => {
+        let aValue, bValue;
+        const aElement = a.querySelector(`[data-${column}]`);
+        const bElement = b.querySelector(`[data-${column}]`);
+        // Check if the cell contains a link with href
+        if (aElement && aElement.querySelector('a[href]')) {
+            aValue = aElement.querySelector('a').getAttribute('href');
+            bValue = bElement.querySelector('a').getAttribute('href');
+        } else {
+            aValue = aElement ? aElement.textContent : '';
+            bValue = bElement ? bElement.textContent : '';
+        }
+        if (newOrder === 'asc') {
+            return aValue.localeCompare(bValue);
+        } else {
+            return bValue.localeCompare(aValue);
+        }
+    });
+
+    // Append rows back to the table
+    table.innerHTML = '';
+    rows.forEach(row => {
+        table.appendChild(row);
+    });
+}
 
 /**
  * hlídá mačkání sort tlačítek
  */
 function sortListener() {
-    // Vyhledání všech tlačítek pro řazení
+    // Find all sort buttons
     const sortButtons = document.querySelectorAll('.sort-toggle');
 
     sortButtons.forEach(button => {
-        // Nastavení správné ikony na základě aktuálního směru řazení
+        // Set the correct icon based on the current sort order
         const currentOrder = button.getAttribute('data-order');
         const icon = button.querySelector('i');
         if (currentOrder === 'asc') {
@@ -95,14 +129,17 @@ function sortListener() {
             icon.classList.remove('bi-arrow-up');
         }
 
-        // Přidání naslouchání na kliknutí
-        button.addEventListener('click', function () {
-            // Přepnutí směru řazení
+        // Add click event listener
+        button.addEventListener('click', function (event) {
+            // Prevent default button behavior
+            event.preventDefault();
+
+            // Toggle sort order
             const currentOrder = this.getAttribute('data-order');
             const newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
             this.setAttribute('data-order', newOrder);
 
-            // Aktualizace ikony podle směru
+            // Update icon based on the new order
             if (newOrder === 'asc') {
                 icon.classList.add('bi-arrow-up');
                 icon.classList.remove('bi-arrow-down');
@@ -111,10 +148,10 @@ function sortListener() {
                 icon.classList.remove('bi-arrow-up');
             }
 
-            // Získání sloupce podle atributu data-sort
+            // Get the column to sort by
             const column = this.getAttribute('data-sort');
 
-            // Volání mockované funkce pro přeuspořádání tabulky
+            // Call the reorderTable function to sort the table
             reorderTable(column, newOrder);
         });
     });
