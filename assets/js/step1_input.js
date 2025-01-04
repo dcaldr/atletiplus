@@ -112,14 +112,17 @@ export function generateYearOptions() {
  * proběhne po zmáčknutí tlačítka další na prvním kroku
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
-export function  firstStepBtnListener(){
+export function  firstStepBtnChecker(){
     console.log('firstStepBtnListener called');
    // event.preventDefault(); //todo:recheck
-    validateFormInput();
+    if(!validateFormInput()){
+        console.error('validateFormInput failed');
+        return false;
+    }
    let teamname = document.querySelector('#teamName').value;
     let season = document.querySelector('#season').value;
     searchPlease(season, teamname).then(r => {
-    return r !== null;
+    return r !== null && r;
 });
     return true;
 }
@@ -129,6 +132,7 @@ export function  firstStepBtnListener(){
  * fixme: teamname - asi udělat listener aby chybová hláška odešla když uživatel začne měnit form
  * todo? - přehodit do parserů??
  * todo?? - přepsat na více znovupoužití -- jestli bude třeba??
+ * @returns {boolean} pokud ok pokračovat
  */
 function validateFormInput() {
     console.log('validate form clicked');
@@ -179,8 +183,10 @@ function validateFormInput() {
     if (!form.checkValidity()) {
         form.reportValidity();
         console.error('něco nevaliduje');
+        return false;
     } else {
         console.log('vše je v pořádku');
+        return true;
     }
 }
 

@@ -8,7 +8,7 @@ let currentStep = 0;
 
 
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
-import { generateYearOptions, firstStepBtnListener } from './step1_input.js';
+import { generateYearOptions, firstStepBtnChecker } from './step1_input.js';
 
 
 function initializeSteps() {
@@ -33,7 +33,16 @@ function showStep(index) {
  * připnutí základních tlačítek
  */
 function addBasicListeners() {
-    document.querySelector('#nextStep1').addEventListener('click', firstStepBtnListener);
+    document.querySelector('#nextStep1').addEventListener('click', goToStep2Listener);
+}
+function goToStep2Listener(){
+    console.log('goToStep2Listener called');
+    if(firstStepBtnChecker()){
+        showStep(1);
+    }
+    else {
+        console.error('Chyba v goToStep2 kroku');
+    }
 }
 
 
