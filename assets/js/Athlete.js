@@ -20,8 +20,8 @@ class Atlet {
             <tr>
             <td><input type="checkbox" class="form-check-input" data-ean="${this.ean}" data-fullname="${this.fullname}" data-birthyear="${this.birthyear}" data-teamname="${this.teamname}" data-year="${year}"></td>
             <td><a href="https://online.atletika.cz/vysledky-atleta/${year}/${this.ean}">${this.fullname}</a></td>
-            <td>${this.birthyear}</td>
             <td>${guessAgeCategory(this.birthyear, year)}</td>
+            <td>${this.birthyear}</td>
             <td>${this.teamname}</td>
             <td class="d-none">${this.ean}</td>
             </tr>
