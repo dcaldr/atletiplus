@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{bootstrap, bootstrapCDN}" />
+    <file url="PROJECT" libraries="{bootstrap, bootstrap-icons, bootstrapCDN}" />
     <includedPredefinedLibrary name="HTTP Pre-Request and Response Handler" />
   </component>
 </project>
