@@ -65,6 +65,49 @@ export function initializeStep2(){
 
 }
 
+ function getSelectedAthletes() {
+    const selectedAthletes = [];
+    const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]:checked');
+    checkboxes.forEach(checkbox => {
+        selectedAthletes.push(checkbox.value);
+    });
+    return selectedAthletes;
+}
+
+
+export function validateSelection() {
+    const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]');
+    let isSelected = false;
+
+    for (let checkbox of checkboxes) {
+        if (checkbox.checked) {
+            isSelected = true;
+            break;
+        }
+    }
+
+    if (!isSelected) {
+        const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-danger alert-dismissible fade show';
+        alert.role = 'alert';
+        alert.innerHTML = `
+            <span>Vyberte alespoň jednoho atleta.</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        alertPlaceholder.appendChild(alert);
+
+        // Remove alert when closed
+        alert.querySelector('.btn-close').addEventListener('click', () => {
+            alert.remove();
+        });
+    }
+
+    return isSelected;
+}
+
+
+
 //// tabulky
 
 function putTableRows(tableData) {

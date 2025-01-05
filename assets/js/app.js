@@ -8,7 +8,7 @@ let steps = [];
 let currentStep = 0;
 
 
-import {initializeStep2} from "./step2_selection.js";
+import {initializeStep2, validateSelection} from "./step2_selection.js";
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
 import { generateYearOptions, firstStepFormChecker } from './step1_input.js';
 
@@ -36,6 +36,7 @@ function showStep(index) {
  */
 function addBasicListeners() {
     document.querySelector('#nextStep1').addEventListener('click', goToStep2Listener);
+    document.querySelector('#nextStep2').addEventListener('click', goToStep3Listener);
 }
  async function goToStep2Listener() {
     console.log('goToStep2Listener called');
@@ -50,6 +51,17 @@ function addBasicListeners() {
     } else {
         console.error('Chyba v goToStep2 kroku');
     }
+}
+ function goToStep3Listener(){
+    console.log('goToStep3Listener called');
+    // let [aa] = await Promise.all([validateSelection()]);
+    if(!validateSelection()) {
+        console.error('Chyba v validaci goToStep3 kroku');
+        return false;
+    }
+    console.log('validateSelection passed');
+ //   initializeStep3();
+    showStep(2);
 }
 
 
@@ -71,6 +83,22 @@ document.addEventListener('DOMContentLoaded', () => {
      // buttonpress
         document.querySelector('#nextStep1').click();
         console.log('nextStep2 clicked');
+        // wait
+   // document.querySelector('#nextStep2').click();
+    // click all rows buttons
+     setTimeout(() => {
+    if (document.querySelectorAll('#step2 tbody input[type="checkbox"]').length >= 4) {
+        document.querySelectorAll('#step2 tbody input[type="checkbox"]').forEach(checkbox => checkbox.click());
+    } else {
+       // console.error('Less than 4 checkboxes found');
+    }
+}, 100); // Adjust the timeout as needed
+
+
+
+
+
+
 
 
 });
