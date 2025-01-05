@@ -149,3 +149,6 @@ function getTableRows(key = 'fullname') {
     return allAtleti.map(atlet => atlet.toFirstTable(selectedYear));
 
 }
+export function getSelectedAthletes() {
+    return selectedAthlets;
+}
