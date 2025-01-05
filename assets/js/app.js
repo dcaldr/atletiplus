@@ -10,9 +10,11 @@ let currentStep = 0;
 
 
 import {initializeStep2, validateSelection} from "./step2_selection.js";
+import {testParser} from "./parsers/parseResults.js";
+import {verifyPhpResults} from "./step3_table.js";
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
 import { generateYearOptions, firstStepFormChecker } from './step1_input.js';
-import {verifyPhpResults} from "./step3_table.js";
+
 
 function initializeSteps() {
     steps = Array.from(document.querySelectorAll('.step'));
@@ -79,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.verifyPhpScript = verifyPhpScript;
     window.verifyPhpInputs = verifyPhpInputs;
     window.verifyPhpResults = verifyPhpResults;
+    window.testParser = testParser;
     // put ujpr9 to nazev oddílu and 2024 to season
      document.querySelector('#teamName').value = 'ujpr9';
      document.querySelector('#season').value = '2024';
