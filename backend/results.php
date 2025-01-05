@@ -1,22 +1,21 @@
 <?php
 // Kontrola roku a EAN
-function isValidEan($ean) {
+function isValidEan($ean): bool
+{
     return preg_match('/^\d+$/', $ean) && strlen($ean) === 11;
 }
 
-function isValidYear($year) {
+function isValidYear($year): bool
+{
     if (!is_numeric($year)) {
-        header('Content-Type: text/plain; charset=utf-8');
-        echo "CHYBA: Neplatný rok: není číselná hodnota.";
-        exit;
+        return false;
     } else {
         $year = (int) $year;
         if ($year < 2003 || $year > date('Y')) {
-            header('Content-Type: text/plain; charset=utf-8');
-            echo "CHYBA: Neplatný rok: mimo rozsah.";
-            exit;
+            return false;
         }
     }
+    return true;
 }
 
 // Získání vstupních dat
