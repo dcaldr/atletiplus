@@ -1,5 +1,7 @@
 import {getSelectedAthletes} from "./Athlete.js";
 import {extractPersonalBests} from "./parsers/parseResults.js";
+import XLSX from "https://cdn.sheetjs.com/xlsx-0.20.3/package/xlsx.mjs";
+//importScripts("https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js");
 
 /**
  * Vybraný rok
@@ -33,6 +35,7 @@ export async function initializeStep3() {
         return false;
     }
     const tableHTMLDefinition = createResultsTable(finishedAthletes);
+    addExportListener();
    // console.log('tableHTMLDefinition', tableHTMLDefinition);
     insertTable(tableHTMLDefinition);
     return result;
@@ -221,7 +224,26 @@ function insertTable(tableHTMLDefinition) {
     const tableContainer = document.querySelector('#step3 #resultsTable');
     tableContainer.innerHTML = tableHTMLDefinition;
 }
+ function exportTableXLSX() {
+    console.log('exportTableXLSX called');
+    const table = document.querySelector('#step3 #resultsTable');
 
+    let downloadFile = XLSX.utils.table_to_book(table,{raw: true});
+     XLSX.writeFile(downloadFile, 'výsledkyAtletiplus.xlsx', {
+         bookType: 'xlsx',
+         bookSST: true,
+         type: 'binary',
+         cellText: true,
+         raw: false,
+         cellDates: true,
+
+     });
+}
+
+function addExportListener() {
+    const exportButton = document.querySelector('#exportTable');
+    exportButton.addEventListener('click', exportTableXLSX);
+}
 
 
 
