@@ -9,7 +9,7 @@ let steps = [];
 let currentStep = 0;
 
 
-import {initializeStep2, validateSelection} from "./step2_selection.js";
+import {getCheckedAthletes, initializeStep2, validateSelection} from "./step2_selection.js";
 import {testParser} from "./parsers/parseResults.js";
 import {initializeStep3, verifyPhpResults} from "./step3_table.js";
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js';
@@ -63,6 +63,7 @@ function addBasicListeners() {
         return false;
     }
     console.log('validateSelection passed');
+    getCheckedAthletes();
     initializeStep3();
     showStep(2);
 }

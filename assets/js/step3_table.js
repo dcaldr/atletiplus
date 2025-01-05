@@ -19,6 +19,7 @@ export function initializeStep3(year){
     }
     selectedYear = year;
 
+
     selectedAthletes = getSelectedAthletes();
    const result = resultsToAthletes(selectedAthletes);
    console.log('finishedAthletes', finishedAthletes);

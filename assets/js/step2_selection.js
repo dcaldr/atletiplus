@@ -69,7 +69,8 @@ export function initializeStep2(){
  * po zmáčknutí tlačítka pošle vybrané atlety do dalšího kroku
  * @returns {*[]}
  */
-function getSelectedAthletes() {
+export function getCheckedAthletes() {
+    console.log('getCheckedAthletes called');
     const selectedAthletes = [];
     const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]:checked');
     checkboxes.forEach(checkbox => {
@@ -81,11 +82,15 @@ function getSelectedAthletes() {
             year: checkbox.getAttribute('data-year')
         });
     });
+    console.log('checkedAthletes', selectedAthletes);
     convertToAthletes(selectedAthletes);
 
 }
 
-
+/**
+ * zkontroluje zda je aspoň něco vybráno
+ * @returns {boolean}
+ */
 export function validateSelection() {
     const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]');
     let isSelected = false;

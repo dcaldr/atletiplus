@@ -156,5 +156,6 @@ function getTableRows(key = 'fullname') {
  */
 export function getSelectedAthletes() {
     console.log('getSelectedAthletes called');
+    console.log('selectedAthlets', selectedAthlets);
     return selectedAthlets;
 }
