@@ -31,11 +31,13 @@ if (!isValidEan($ean) || !isValidYear($year)) {
 // Sestavení URL pro požadavek
 $url = "https://online.atletika.cz/vysledky-atleta/$year/$ean";
 
-// Cesta k adresáři cache
+// Cesta k adresáři cache -- nedostatek práv
 $cacheDir = __DIR__ . '/searchCache';
-if (!is_dir($cacheDir)) {
-    mkdir($cacheDir, 0777, true);
-}
+//if (!is_dir($cacheDir)) {
+//    mkdir($cacheDir, 0777, true);
+//} else {
+//    chmod($cacheDir, 0777); // Ensure the directory has the correct permissions
+//}
 
 // Cesta k souboru cache
 $cacheFile = "$cacheDir/{$ean}_{$year}.html";
@@ -67,7 +69,7 @@ if ($response === false || $httpCode !== 200) {
 }
 
 // Uložení do cache
-file_put_contents($cacheFile, $response);
+//file_put_contents($cacheFile, $response);
 
 // Vrácení HTML obsahu
 header('Content-Type: text/html; charset=utf-8');
