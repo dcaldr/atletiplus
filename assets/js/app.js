@@ -32,6 +32,7 @@ function showStep(index) {
         step.classList.toggle('d-none', i !== index);
     });
     currentStep = index;
+    history.pushState({step: index}, `Krok ${index}`, `#step${index + 1}`);
 }
 
 /**
@@ -44,6 +45,16 @@ function addBasicListeners() {
     document.querySelector('#prevStep3').addEventListener('click', () => {
         clearStep3Results();
         showStep(1);
+    });
+    window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.step !== undefined) {
+            if(event.state.step === 1) {
+                clearStep3Results();
+            }
+            showStep(event.state.step);
+        } else {
+            showStep(0);
+        }
     });
 
 }
@@ -106,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }, 100); // Adjust the timeout as needed
 
-
+    history.replaceState({ step: 0 }, 'Step 1', '#step1');
 
 
 
