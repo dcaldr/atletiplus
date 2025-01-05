@@ -11,8 +11,8 @@ let currentStep = 0;
 
 import {initializeStep2, validateSelection} from "./step2_selection.js";
 import {testParser} from "./parsers/parseResults.js";
-import {verifyPhpResults} from "./step3_table.js";
-import { verifyPhpScript, verifyPhpInputs } from './step1_input.js'; // debug fce
+import {initializeStep3, verifyPhpResults} from "./step3_table.js";
+import { verifyPhpScript, verifyPhpInputs } from './step1_input.js';
 import { generateYearOptions, firstStepFormChecker } from './step1_input.js';
 
 
@@ -63,7 +63,7 @@ function addBasicListeners() {
         return false;
     }
     console.log('validateSelection passed');
- //   initializeStep3();
+    initializeStep3();
     showStep(2);
 }
 

@@ -2,7 +2,7 @@ let allAtleti = [];
 let selectedAthlets = [];
 let selectedYear = null;
 
-class Atlet {
+export class Atlet {
     constructor(inTeamID, inEan, inFullname, inBirthyear, inRegistred, inTeamname) {
         this.teamID = inTeamID;
         this.ean = inEan;
@@ -12,7 +12,7 @@ class Atlet {
         this.teamname = inTeamname;
         this.disciplines = []; // Pole disciplín a výkonů
     }
-    addDiscipline(discipline, performance) {
+  addDiscipline(discipline, performance) {
         this.disciplines.push({ discipline, performance });
     }
     toFirstTable(year) {
@@ -149,6 +149,12 @@ function getTableRows(key = 'fullname') {
     return allAtleti.map(atlet => atlet.toFirstTable(selectedYear));
 
 }
+
+/**
+ * Vrátí pole vybraných atletů
+ * @returns {*[]}
+ */
 export function getSelectedAthletes() {
+    console.log('getSelectedAthletes called');
     return selectedAthlets;
 }

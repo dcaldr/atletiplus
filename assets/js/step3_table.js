@@ -1,10 +1,14 @@
 import {getSelectedAthletes} from "./Athlete.js";
-import {extractPersonalBests} from "./parsers/parseResults";
+import {extractPersonalBests} from "./parsers/parseResults.js";
 let selectedYear;
 let selectedAthletes = [];
+/**
+ * Pole atletů s výsledky
+* @type {Atlet[]}
+ */
 let finishedAthletes = [];
 
-function initializeStep3(year){
+export function initializeStep3(year){
     console.log('initializeStep3 called');
     if(year === null){
         console.error('initializeStep3: year null');
@@ -16,6 +20,10 @@ function initializeStep3(year){
     selectedYear = year;
 
     selectedAthletes = getSelectedAthletes();
+   const result = resultsToAthletes(selectedAthletes);
+   console.log('finishedAthletes', finishedAthletes);
+   return result;
+
 
 
 }
@@ -26,6 +34,12 @@ function checkEan(athlete) {
 
 }
 
+/**
+ * Ptá se API na data
+ * @param selectedYear
+ * @param ean
+ * @returns {Promise<string | void>}
+ */
  function getAthleteData(selectedYear, ean) {
     const url = `backend/results.php?year=${selectedYear}&ean=${ean}`;
     return fetch(url)
@@ -43,23 +57,61 @@ function checkEan(athlete) {
         });
 }
 
-async function getAthleteResults(selectedYear, ean) {
+/**
+ * postup zpracování dat atleta
+ * @param selectedYear
+ * @param ean
+ * @returns {({discipline: string, result: string}|null)[]|boolean}
+ * možná promise !!!
+ */
+async function prepareAthleteResults(selectedYear, ean) {
     const [mHtml] = await Promise.all([getAthleteData(selectedYear, ean)]); //fixme
-    const mResults = extractPersonalBests(mHtml);
+    const mResults = await extractPersonalBests(mHtml);
+
+    if(mResults === null){
+        console.error('prepareAthleteResults: no results');
+        return false;
+    }
+    // pokud error
+    if(mResults === false){
+        console.error('prepareAthleteResults: error parsing results');
+        return false;
+    }
+    return mResults;
+
 }
 
+/**
+ * vstupní fce do překláadání výsledků na atlety
+ * @param athleteList
+ * @returns {boolean}
+ */
 function resultsToAthletes(athleteList){
     console.log('resultsToAthletes called');
+    if(athleteList.length === 0){
+        console.warn('resultsToAthletes: no athletes');
+        return false;
+    }
     // console.log('selectedAthletes', selectedAthletes);
     // console.log('selectedYear', selectedYear);
-    for(let athlete in athleteList){
+
+    for(let athlete of athleteList){
         // check ean and year
         checkEan(athlete);
         // if good get results for it
-     const  finishedAthlete =  getAthleteResults(selectedYear, athlete.ean);
-        finishedAthletes.push(finishedAthlete);
+     let  finishedResults =  prepareAthleteResults(selectedYear, athlete.ean);
+     if (finishedResults === false) {
+         console.error('resultsToAthletes: error getting results');
+         return false;
+     }
+
+     for (let result in finishedResults) {
+         athlete.addDiscipline(result);
+     }
+      finishedAthletes.push(athlete);
 
     }
+    return true;
 
 
 
