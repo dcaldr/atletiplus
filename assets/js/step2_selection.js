@@ -80,7 +80,8 @@ export function getCheckedAthletes() {
             fullname: checkbox.getAttribute('data-fullname'),
             birthyear: checkbox.getAttribute('data-birthyear'),
             teamname: checkbox.getAttribute('data-teamname'),
-            year: checkbox.getAttribute('data-year')
+            year: checkbox.getAttribute('data-year'),
+            category: checkbox.getAttribute('data-category'),
         });
     });
     console.log('checkedAthletes', selectedAthletes);
