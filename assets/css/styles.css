@@ -13,5 +13,5 @@
 }
 
 #step2 .table-responsive {
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 273px); /* od oka*/
 }
