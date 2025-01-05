@@ -2,31 +2,37 @@ let allAtleti = [];
 let selectedAthlets = [];
 let selectedYear = null;
 
+/**
+ * Třída reprezentující atleta
+ * @class Atlet
+ */
 export class Atlet {
-    constructor(inTeamID, inEan, inFullname, inBirthyear, inRegistred, inTeamname) {
+    constructor(inTeamID, inEan, inFullname, inBirthyear, inRegistred, inTeamname, inCategory) {
         this.teamID = inTeamID;
         this.ean = inEan;
         this.fullname = inFullname;
         this.birthyear = inBirthyear;
         this.registered = inRegistred; // asi půjde zahodit
         this.teamname = inTeamname;
+        this.category= inCategory
         this.disciplines = []; // Pole disciplín a výkonů
     }
   addDiscipline(discipline, performance) {
         this.disciplines.push({ discipline, performance });
     }
-    toFirstTable(year) {
-        return `
-            <tr>
-            <td><input type="checkbox" class="form-check-input" data-ean="${this.ean}" data-fullname="${this.fullname}" data-birthyear="${this.birthyear}" data-teamname="${this.teamname}" data-year="${year}"></td>
-            <td><a href="https://online.atletika.cz/vysledky-atleta/${year}/${this.ean}">${this.fullname}</a></td>
-            <td>${guessAgeCategory(this.birthyear, year)}</td>
-            <td>${this.birthyear}</td>
-            <td>${this.teamname}</td>
-            <td class="d-none">${this.ean}</td>
-            </tr>
-        `;
-    }
+toFirstTable(year) {
+    const category = guessAgeCategory(this.birthyear, year);
+    return `
+        <tr>
+        <td><input type="checkbox" class="form-check-input" data-ean="${this.ean}" data-fullname="${this.fullname}" data-birthyear="${this.birthyear}" data-teamname="${this.teamname}" data-year="${year}" data-category="${category}"></td>
+        <td><a href="https://online.atletika.cz/vysledky-atleta/${year}/${this.ean}">${this.fullname}</a></td>
+        <td>${category}</td>
+        <td>${this.birthyear}</td>
+        <td>${this.teamname}</td>
+        <td class="d-none">${this.ean}</td>
+        </tr>
+    `;
+}
 
 
 
@@ -42,7 +48,8 @@ export function sendToAthletes(selectedAthletes) {
             athlete.fullname,
             athlete.birthyear,
             null, // není potřeba
-            athlete.teamname
+            athlete.teamname,
+            athlete.category,
         );
     });
     selectedAthlets = athletesArray;
@@ -156,6 +163,6 @@ function getTableRows(key = 'fullname') {
  */
 export function getSelectedAthletes() {
     console.log('getSelectedAthletes called');
-    console.log('selectedAthlets', selectedAthlets);
+   // console.log('selectedAthlets', selectedAthlets);
     return selectedAthlets;
 }

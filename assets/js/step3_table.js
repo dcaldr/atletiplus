@@ -18,18 +18,25 @@ let finishedAthletes = [];
  * kvůli jinému rozložení fcí je toto voláno z app.js -- tedy rok už musí být nastaven
  * @returns {boolean}
  */
-export function initializeStep3(){
+export async function initializeStep3() {
     console.log('initializeStep3 called');
-    if(selectedYear < 2003 || selectedYear > new Date().getFullYear()){
+    if (selectedYear < 2003 || selectedYear > new Date().getFullYear()) {
         console.error('initializeStep3: year out of range');
         return false;
     }
 
     selectedAthletes = getSelectedAthletes();
-   const result = resultsToAthletes(selectedAthletes);
-   console.log('finishedAthletes', finishedAthletes);
-   return result;
-
+    const result = await resultsToAthletes(selectedAthletes);
+    console.log('result', result);
+    console.log('finishedAthletes', finishedAthletes);
+    if (!result) {
+        console.error('initializeStep3: error in resultsToAthletes');
+        return false;
+    }
+    const tableHTMLDefinition = createResultsTable(finishedAthletes);
+    console.log('tableHTMLDefinition', tableHTMLDefinition);
+    insertTable(tableHTMLDefinition);
+    return result;
 
 
 }
@@ -138,6 +145,85 @@ async function resultsToAthletes(athleteList) {
 
 
 }
+
+////TABULKA
+/**
+ * Vytvoří tabulku s výsledky atletů
+ * @param athletes
+ * @returns {string} "html" tabulka
+ */
+function createResultsTable(athletes) {
+    console.log('createResultsTable called');
+    console.log('athletes', athletes);
+    // Pokud je pole atletů prázdné, inicializovat prázdné disciplíny
+    const disciplines = athletes.length > 0
+        ? [...new Set(athletes.flatMap(atlet => atlet.disciplines.map(d => d.discipline)))]
+        : [];
+
+    // Vytvoření hlavičky tabulky
+    const headerRow = ['Jméno', 'Rok narození', 'Kategorie', ...disciplines];
+
+    // Vytvoření řádků tabulky
+    const rows = athletes.map(atlet => {
+        const row = [
+            atlet.fullname,
+            atlet.birthyear,
+            atlet.category
+        ];
+
+        // Přidání výkonů pro každou disciplínu
+        disciplines.forEach(discipline => {
+            const performance = atlet.disciplines.find(d => d.discipline === discipline)?.performance || '';
+            row.push(performance);
+        });
+
+        return row;
+    });
+
+    // Generování HTML tabulky (nebo jiného výstupu)
+    let tableHtmlDefinition = '<table class="table table-striped">';
+
+    // Přidání hlavičky
+    tableHtmlDefinition += '<thead><tr>';
+    headerRow.forEach((header, index) => {
+        tableHtmlDefinition += `<th scope="${index === 0 ? 'col' : 'col'}">${header}</th>`;
+    });
+    tableHtmlDefinition += '</tr></thead>';
+
+    // Přidání řádků
+    tableHtmlDefinition += '<tbody>';
+    rows.forEach((row, rowIndex) => {
+        tableHtmlDefinition += '<tr>';
+        row.forEach((cell, cellIndex) => {
+            if (cellIndex === 0) {
+                tableHtmlDefinition += `<th scope="row">${cell}</th>`;
+            } else {
+                tableHtmlDefinition += `<td>${cell}</td>`;
+            }
+        });
+        tableHtmlDefinition += '</tr>';
+    });
+    tableHtmlDefinition += '</tbody></table>';
+
+    return tableHtmlDefinition;
+}
+
+/**
+ * vloží tabulku na místo původní
+ * pokud bude čas připne další legrační věci
+ * @param tableHTMLDefinition
+ */
+function insertTable(tableHTMLDefinition) {
+    const tableContainer = document.querySelector('#step3 #resultsTable');
+    tableContainer.innerHTML = tableHTMLDefinition;
+}
+
+
+
+
+
+
+
 export function verifyPhpResults() {
     const eanList = [
         '10000187461',
