@@ -2,16 +2,16 @@
 .step {
     height: calc(100vh - 200px);
 }
-#step2 {
-    height: 100vh;
-    padding: 1rem;
-}
+/*#step2 {*/
+/*    height: 100vh;*/
+/*    padding: 1rem;*/
+/*}*/
 
-#step2 .card {
-    height: calc(100vh - 3rem);
-    margin: 0;
-}
+/*#step2 .card {*/
+/*    height: calc(100vh - 3rem);*/
+/*    margin: 0;*/
+/*}*/
 
-#step2 .table-responsive {
-    max-height: calc(100vh - 273px); /* od oka*/
-}
+/*#step2 .table-responsive {*/
+/*    max-height: calc(100vh - 273px); !* od oka*!*/
+/*}*/
