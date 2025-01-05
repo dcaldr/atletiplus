@@ -60,7 +60,7 @@ $postData = http_build_query([
     'columns[3][searchable]' => 'true',
     'columns[3][orderable]' => 'false',
     'start' => 0,
-    'length' => 50, //počet výsledků dukla má cca 730 atletů (todo: vymyslet zvýšení, do produkce)
+    'length' => 100, //počet výsledků dukla má cca 730 atletů (todo: vymyslet zvýšení, do produkce)
     'season' => $year,
     'fulltext' => $query,
 ]);
@@ -71,26 +71,26 @@ $headers = [
     'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.86 Safari/537.36',
 ];
 
-//// Inicializace cURL
-//$ch = curl_init();
-//curl_setopt($ch, CURLOPT_URL, $url); // atletika.cz
-//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // zabalení do stringu?
-//curl_setopt($ch, CURLOPT_POST, true); // požije POST na atletika.cz
-//curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); // nasáčkuje data requestu
-//curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); // hlavička
-//
-//// Odeslání požadavku na server
-//$response = curl_exec($ch); // doopravdy pošle
-//
-//// Kontrola na chyby -- čistě transitu
-//if (curl_errno($ch)) {
-//    echo json_encode(['error' => curl_error($ch)]);
-//} else {
-//    echo $response;
-//}
-//
-//// Zavření cURL
-//curl_close($ch);
+// Inicializace cURL
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url); // atletika.cz
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // zabalení do stringu?
+curl_setopt($ch, CURLOPT_POST, true); // požije POST na atletika.cz
+curl_setopt($ch, CURLOPT_POSTFIELDS, $postData); // nasáčkuje data requestu
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); // hlavička
+
+// Odeslání požadavku na server
+$response = curl_exec($ch); // doopravdy pošle
+
+// Kontrola na chyby -- čistě transitu
+if (curl_errno($ch)) {
+    echo json_encode(['error' => curl_error($ch)]);
+} else {
+    echo $response;
+}
+
+// Zavření cURL
+curl_close($ch);
 
 // pro testování aby se nevolalo API
- echo file_get_contents('../data/athletes.json');
+// echo file_get_contents('../data/athletes.json');

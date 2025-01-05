@@ -54,8 +54,11 @@ export function sendToAthletes(checkboxedAthletes) {
             athlete.category,
         );
     });
-    selectedAthlets1 = athletesArray;
-    return athletesArray;
+    //FIXME: prevents null athlete of going into the array
+    selectedAthlets1 = athletesArray.filter(athlete => athlete.ean !== null);
+
+    //selectedAthlets1 = athletesArray;
+    return selectedAthlets1;
 }
 function guessAgeCategory(birthYearTwoDigits, referenceYear) {
     // Převod vstupů na čísla a kontrola
@@ -118,6 +121,8 @@ function sortAtleti(atleti, key, order = 'asc') {
  * @returns {Object[]} pole objektů Atlet
  */
 function transformJsonToAtleti(jsonData) {
+    console.log('transformJsonToAtleti called');
+    console.log('jsonData', jsonData);
     const atleti = [];
     const data = jsonData.data; // Access the data key
     for (let i = 0; i < data.length; i++) {

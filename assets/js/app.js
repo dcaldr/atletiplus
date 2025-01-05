@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateYearOptions();
     showStep(0); // pro jistotu
     addBasicListeners();
+    history.replaceState({ step: 0 }, 'Step 1', '#step1');
     window.verifyPhpScript = verifyPhpScript;
     window.verifyPhpInputs = verifyPhpInputs;
     window.verifyPhpResults = verifyPhpResults;
@@ -109,15 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // wait
    // document.querySelector('#nextStep2').click();
     // click all rows buttons
-     setTimeout(() => {
-    if (document.querySelectorAll('#step2 tbody input[type="checkbox"]').length >= 4) {
-        document.querySelectorAll('#step2 tbody input[type="checkbox"]').forEach(checkbox => checkbox.click());
+setTimeout(() => {
+    const checkboxes = document.querySelectorAll('#step2 tbody input[type="checkbox"]');
+    if (checkboxes.length >= 4) {
+        checkboxes.forEach(checkbox => checkbox.click());
     } else {
-       // console.error('Less than 4 checkboxes found');
+        console.error('Less than 4 checkboxes found');
     }
-}, 100); // Adjust the timeout as needed
+}, 500); // Adjust the timeout as needed
 
-    history.replaceState({ step: 0 }, 'Step 1', '#step1');
+
 
 
 
