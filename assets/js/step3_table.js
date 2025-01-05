@@ -1,4 +1,5 @@
 import {getSelectedAthletes} from "./Athlete.js";
+import {extractPersonalBests} from "./parsers/parseResults";
 let selectedYear;
 let selectedAthletes = [];
 let finishedAthletes = [];
@@ -43,8 +44,8 @@ function checkEan(athlete) {
 }
 
 function getAthleteResults(selectedYear, ean) {
-  const mHtml=  getAthleteData(selectedYear, ean);
-    const mResults = get
+  const mHtml= await  getAthleteData(selectedYear, ean); //fixme
+    const mResults = extractPersonalBests(mHtml);
 }
 
 function resultsToAthletes(athleteList){
