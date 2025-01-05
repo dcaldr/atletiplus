@@ -106,7 +106,8 @@ export function validateSelection() {
     }
 
     if (!isSelected) {
-        const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
+    const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
+    if (!alertPlaceholder.querySelector('.alert')) {
         const alert = document.createElement('div');
         alert.className = 'alert alert-danger alert-dismissible fade show';
         alert.role = 'alert';
@@ -121,6 +122,7 @@ export function validateSelection() {
             alert.remove();
         });
     }
+}
 
     return isSelected;
 }
@@ -240,8 +242,10 @@ function mainCheckboxListener() {
     const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]');
     let pressTimer;
     let notificationShown = false;
+    let longPressHandled = false; // v podstatě jako u mechanických tlačítek
 
     function handleLongPress() {
+        longPressHandled = true;
         mainCheckbox.checked = !mainCheckbox.checked;
         checkboxes.forEach(checkbox => {
             checkbox.checked = mainCheckbox.checked;
@@ -269,11 +273,15 @@ function mainCheckboxListener() {
     }
 
     mainCheckbox.addEventListener('mousedown', () => {
-        pressTimer = setTimeout(handleLongPress, 500); // Long press timeout
+        longPressHandled = false;
+        pressTimer = setTimeout(handleLongPress, 300); // Long press timeout
     });
 
     mainCheckbox.addEventListener('mouseup', () => {
         clearTimeout(pressTimer);
+        if (!longPressHandled) {
+            handleShortPress();
+        }
     });
 
     mainCheckbox.addEventListener('mouseleave', () => {
@@ -282,10 +290,5 @@ function mainCheckboxListener() {
 
     mainCheckbox.addEventListener('click', (event) => {
         event.preventDefault();
-        if (event.detail === 1) {
-            setTimeout(() => {
-                handleShortPress();
-            }, 5); // Short press timeout
-        }
     });
 }
