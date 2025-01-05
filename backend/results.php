@@ -22,9 +22,18 @@ function isValidYear($year): bool
 $ean = $_GET['ean'] ?? '';
 $year = $_GET['year'] ?? '';
 
+if (!$ean) {
+    echo "CHYBA: Chybí ean.";
+    exit;
+}
+if (!$year) {
+    echo "CHYBA: Chybí year.";
+    exit;
+}
+
 if (!isValidEan($ean) || !isValidYear($year)) {
     header('Content-Type: text/plain; charset=utf-8');
-    echo "CHYBA: Neplatný vstup. Zkontrolujte EAN a rok.";
+    echo "CHYBA: Neplatný vstup. Zkontrolujte EAN: ${ean} a rok ${year}.";
     exit;
 }
 

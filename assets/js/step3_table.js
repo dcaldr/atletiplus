@@ -1,5 +1,10 @@
 import {getSelectedAthletes} from "./Athlete.js";
 import {extractPersonalBests} from "./parsers/parseResults.js";
+
+/**
+ * Vybraný rok
+ * @type {number}
+ */
 let selectedYear;
 let selectedAthletes = [];
 /**
@@ -8,17 +13,17 @@ let selectedAthletes = [];
  */
 let finishedAthletes = [];
 
-export function initializeStep3(year){
+/**
+ * provede inicializaci dat pro krok 3
+ * kvůli jinému rozložení fcí je toto voláno z app.js -- tedy rok už musí být nastaven
+ * @returns {boolean}
+ */
+export function initializeStep3(){
     console.log('initializeStep3 called');
-    if(year === null){
-        console.error('initializeStep3: year null');
-        return false;
-    } if(year < 2003 || year > new Date().getFullYear()){
+    if(selectedYear < 2003 || selectedYear > new Date().getFullYear()){
         console.error('initializeStep3: year out of range');
         return false;
     }
-    selectedYear = year;
-
 
     selectedAthletes = getSelectedAthletes();
    const result = resultsToAthletes(selectedAthletes);
@@ -27,6 +32,10 @@ export function initializeStep3(year){
 
 
 
+}
+
+export function setStep3Year(year){
+    selectedYear = year;
 }
 
 function checkEan(athlete) {
@@ -66,9 +75,19 @@ function checkEan(athlete) {
  * možná promise !!!
  */
 async function prepareAthleteResults(selectedYear, ean) {
+    console.log('prepareAthleteResults called');
+   // console.log('selectedYear', selectedYear, 'ean', ean);
+ if(selectedYear === null || selectedYear === undefined){
+        console.error('prepareAthleteResults: selectedYear null or undefined');
+        return false;
+    }
+    if(ean === null){
+        console.error('prepareAthleteResults: ean null');
+        return false;
+    }
     const [mHtml] = await Promise.all([getAthleteData(selectedYear, ean)]); //fixme
     const mResults = await extractPersonalBests(mHtml);
-
+   //     console.log('prepareAthleresults:',ean, 'mResults', mResults);
     if(mResults === null){
         console.error('prepareAthleteResults: no results');
         return false;
@@ -87,33 +106,35 @@ async function prepareAthleteResults(selectedYear, ean) {
  * @param athleteList
  * @returns {boolean}
  */
-function resultsToAthletes(athleteList){
+async function resultsToAthletes(athleteList) {
     console.log('resultsToAthletes called');
-    if(athleteList.length === 0){
+    if (athleteList.length === 0) {
         console.warn('resultsToAthletes: no athletes');
         return false;
     }
     // console.log('selectedAthletes', selectedAthletes);
     // console.log('selectedYear', selectedYear);
 
-    for(let athlete of athleteList){
+    for (let athlete of athleteList) {
         // check ean and year
         checkEan(athlete);
         // if good get results for it
-     let  finishedResults =  prepareAthleteResults(selectedYear, athlete.ean);
-     if (finishedResults === false) {
-         console.error('resultsToAthletes: error getting results');
-         return false;
-     }
+        let finishedResults = await prepareAthleteResults(selectedYear, athlete.ean);
+      //  console.log('finishedResults', finishedResults);
+        if (finishedResults === false) {
+            console.error('resultsToAthletes: error getting results');
+            return false;
+        }
 
-     for (let result in finishedResults) {
-         athlete.addDiscipline(result);
-     }
-      finishedAthletes.push(athlete);
+        for (let result of finishedResults) {
+          //  console.log('result', result);
+            const { discipline, result: performance } = result;
+            athlete.addDiscipline(discipline, performance);
+        }
+        finishedAthletes.push(athlete);
 
     }
     return true;
-
 
 
 }

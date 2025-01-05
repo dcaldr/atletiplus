@@ -1,5 +1,6 @@
 import {validateSearchResults} from "./parsers/parseSearch.js";
-import {convertToAthletes, manageAthletes} from "./Athlete.js";
+import {sendToAthletes, manageAthletes} from "./Athlete.js";
+import {setStep3Year} from "./step3_table.js";
 
 let inJson = null;
 let selectedYear = null;
@@ -83,7 +84,8 @@ export function getCheckedAthletes() {
         });
     });
     console.log('checkedAthletes', selectedAthletes);
-    convertToAthletes(selectedAthletes);
+    sendToAthletes(selectedAthletes);
+    setStep3Year(selectedYear);
 
 }
 

@@ -34,7 +34,7 @@ export class Atlet {
 
 
 }
-export function convertToAthletes(selectedAthletes) {
+export function sendToAthletes(selectedAthletes) {
     const athletesArray = selectedAthletes.map(athlete => {
         return new Atlet(
             null, // Assuming teamID is not provided in the selectedAthletes data
