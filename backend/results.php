@@ -57,7 +57,10 @@ if (file_exists($cacheFile)) {
     echo file_get_contents($cacheFile);
     exit;
 }
-
+// api přetížení v etstování
+header('Content-Type: text/plain; charset=utf-8');
+echo "Nevzalo z paěti";
+exit;
 // Inicializace cURL
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);

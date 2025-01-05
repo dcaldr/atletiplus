@@ -26,9 +26,8 @@ export async function initializeStep3() {
     }
 
     selectedAthletes = getSelectedAthletes();
-    const result = await resultsToAthletes(selectedAthletes);
+    const result = await resultsToAthletes(selectedAthletes); // bacha bez toho awaitu to selže
     console.log('result', result);
-    console.log('finishedAthletes', finishedAthletes);
     if (!result) {
         console.error('initializeStep3: error in resultsToAthletes');
         return false;
