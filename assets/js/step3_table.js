@@ -43,8 +43,8 @@ function checkEan(athlete) {
         });
 }
 
-function getAthleteResults(selectedYear, ean) {
-  const mHtml= await  getAthleteData(selectedYear, ean); //fixme
+async function getAthleteResults(selectedYear, ean) {
+    const [mHtml] = await Promise.all([getAthleteData(selectedYear, ean)]); //fixme
     const mResults = extractPersonalBests(mHtml);
 }
 
