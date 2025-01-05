@@ -29,29 +29,47 @@ class Atlet {
     }
 
 
+
+
+
+
+}
+export function convertToAthletes(selectedAthletes) {
+    const athletesArray = selectedAthletes.map(athlete => {
+        return new Atlet(
+            null, // Assuming teamID is not provided in the selectedAthletes data
+            athlete.ean,
+            athlete.fullname,
+            athlete.birthyear,
+            null, // není potřeba
+            athlete.teamname
+        );
+    });
+    selectedAthlets = athletesArray;
+    return athletesArray;
 }
 function guessAgeCategory(birthYearTwoDigits, referenceYear) {
     // Převod vstupů na čísla a kontrola
-    const by = parseInt(birthYearTwoDigits, 10);
-    const ry = parseInt(referenceYear, 10);
-    if (isNaN(by) || isNaN(ry)) {
+    const byrthYear = parseInt(birthYearTwoDigits, 10);
+    const selectedYear = parseInt(referenceYear, 10);
+    if (isNaN(byrthYear) || isNaN(selectedYear)) {
         throw new Error("birthYearTwoDigits i referenceYear musí být platná čísla.");
     }
 
     // Určení století (např. 20 pro roky 2000-2099)
-    const century = Math.floor(ry / 100);
+    const century = Math.floor(selectedYear / 100);
     // math voodoo :D
     // Pokud je dvoučíslí větší než % 100 referenceYear, znamená to, že máme rok z předchozího století (19**),
     // jinak z toho samého století (20**).
     let birthYear;
-    if (by > ry % 100) {
-        birthYear = (century - 1) * 100 + by;
+    if (byrthYear > selectedYear % 100) {
+        birthYear = (century - 1) * 100 + byrthYear;
     } else {
-        birthYear = century * 100 + by;
+        birthYear = century * 100 + byrthYear;
     }
 
     // Věk
-    const age = ry - birthYear;
+    const age = selectedYear - birthYear;
 
     // Rozdělení do kategorií podle věku
     if (age <= 11) {

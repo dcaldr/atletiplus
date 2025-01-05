@@ -1,5 +1,5 @@
 import {validateSearchResults} from "./parsers/parseSearch.js";
-import {manageAthletes} from "./Athlete.js";
+import {convertToAthletes, manageAthletes} from "./Athlete.js";
 
 let inJson = null;
 let selectedYear = null;
@@ -65,13 +65,24 @@ export function initializeStep2(){
 
 }
 
- function getSelectedAthletes() {
+/**
+ * po zmáčknutí tlačítka pošle vybrané atlety do dalšího kroku
+ * @returns {*[]}
+ */
+function getSelectedAthletes() {
     const selectedAthletes = [];
     const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]:checked');
     checkboxes.forEach(checkbox => {
-        selectedAthletes.push(checkbox.value);
+        selectedAthletes.push({
+            ean: checkbox.getAttribute('data-ean'),
+            fullname: checkbox.getAttribute('data-fullname'),
+            birthyear: checkbox.getAttribute('data-birthyear'),
+            teamname: checkbox.getAttribute('data-teamname'),
+            year: checkbox.getAttribute('data-year')
+        });
     });
-    return selectedAthletes;
+    convertToAthletes(selectedAthletes);
+
 }
 
 
