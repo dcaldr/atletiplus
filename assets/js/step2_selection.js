@@ -59,6 +59,7 @@ export function initializeStep2(){
 
     putTableRows(tableData);
     sortListener();
+    mainCheckboxListener();
     return true;
 
 
@@ -74,32 +75,42 @@ function putTableRows(tableData) {
     });
 }
 
-
-function reorderTable(column, newOrder) {
+/**
+ * pomáhá při řazení tabulky - vezme řádky do listu, seřadí , smaže staré  a vloží seřazené
+ * @param columnIndex
+ * @param newOrder
+ */
+function reorderTable(columnIndex, newOrder) {
     console.log('reorderTable called');
     // Get all table rows
     const table = document.querySelector('#selectAthletes');
-    console.log('table', table);
+    //console.log('table', table);
     const rows = Array.from(table.querySelectorAll('tr'));
-    console.log('rows', rows);
+   // console.log('rows', rows);
 
     // Sort rows
     rows.sort((a, b) => {
-        let aValue, bValue;
-        const aElement = a.querySelector(`[data-${column}]`);
-        const bElement = b.querySelector(`[data-${column}]`);
-        // Check if the cell contains a link with href
-        if (aElement && aElement.querySelector('a[href]')) {
-            aValue = aElement.querySelector('a').getAttribute('href');
-            bValue = bElement.querySelector('a').getAttribute('href');
+        let leftVal, rightVal;
+        const aElement = a.children[columnIndex];
+        const bElement = b.children[columnIndex];
+        // console.log('aElement', aElement);
+        // console.log('bElement', bElement);
+
+        // jestli to je ta s odkazem
+        if (aElement && aElement.querySelector('a')) {
+            leftVal = aElement.querySelector('a').textContent.trim();
+            rightVal = bElement.querySelector('a').textContent.trim();
         } else {
-            aValue = aElement ? aElement.textContent : '';
-            bValue = bElement ? bElement.textContent : '';
+            leftVal = aElement ? aElement.textContent.trim() : '';
+            rightVal = bElement ? bElement.textContent.trim() : '';
         }
+        // console.log('aValue', leftVal);
+        // console.log('bValue', rightVal);
+
         if (newOrder === 'asc') {
-            return aValue.localeCompare(bValue);
+            return leftVal.localeCompare(rightVal);
         } else {
-            return bValue.localeCompare(aValue);
+            return rightVal.localeCompare(leftVal);
         }
     });
 
@@ -117,7 +128,7 @@ function sortListener() {
     // Find all sort buttons
     const sortButtons = document.querySelectorAll('.sort-toggle');
 
-    sortButtons.forEach(button => {
+    sortButtons.forEach((button, index) => {
         // Set the correct icon based on the current sort order
         const currentOrder = button.getAttribute('data-order');
         const icon = button.querySelector('i');
@@ -148,12 +159,71 @@ function sortListener() {
                 icon.classList.remove('bi-arrow-up');
             }
 
-            // Get the column to sort by
-            const column = this.getAttribute('data-sort');
+            // Get the column index to sort by
+            const columnIndex = index + 1; // Adjust for the checkbox column
 
             // Call the reorderTable function to sort the table
-            reorderTable(column, newOrder);
+            reorderTable(columnIndex, newOrder);
         });
     });
 }
 
+
+/**
+ *  hlídá hlavní zaškrtávátko - pokud je zaškrtnuto, tak zaškrtne všechny ostatní
+ *  note: js umí vkládat fce do sebe :DD -- ale IDE to očividně moc nevidí rádo
+ */
+function mainCheckboxListener() {
+    const mainCheckbox = document.querySelector('#step2 #selectAll');
+    const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]');
+    let pressTimer;
+    let notificationShown = false;
+
+    function handleLongPress() {
+        mainCheckbox.checked = !mainCheckbox.checked;
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = mainCheckbox.checked;
+        });
+    }
+
+    function handleShortPress() {
+        if (!notificationShown) {
+            const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
+            const alert = document.createElement('div');
+            alert.className = 'alert alert-warning alert-dismissible fade show';
+            alert.role = 'alert';
+            alert.innerHTML = `
+                <span>Pro o(d)značení podržte déle - dokud se tlačítka nezmění</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            alertPlaceholder.appendChild(alert);
+            notificationShown = true;
+
+            // Remove notification flag when alert is closed
+            alert.querySelector('.btn-close').addEventListener('click', () => {
+                notificationShown = false;
+            });
+        }
+    }
+
+    mainCheckbox.addEventListener('mousedown', () => {
+        pressTimer = setTimeout(handleLongPress, 500); // Long press timeout
+    });
+
+    mainCheckbox.addEventListener('mouseup', () => {
+        clearTimeout(pressTimer);
+    });
+
+    mainCheckbox.addEventListener('mouseleave', () => {
+        clearTimeout(pressTimer);
+    });
+
+    mainCheckbox.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (event.detail === 1) {
+            setTimeout(() => {
+                handleShortPress();
+            }, 5); // Short press timeout
+        }
+    });
+}
