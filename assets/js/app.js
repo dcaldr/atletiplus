@@ -40,6 +40,8 @@ function showStep(index) {
 function addBasicListeners() {
     document.querySelector('#nextStep1').addEventListener('click', goToStep2Listener);
     document.querySelector('#nextStep2').addEventListener('click', goToStep3Listener);
+    document.querySelector('#prevStep2').addEventListener('click', () => showStep(0));
+    document.querySelector('#prevStep3').addEventListener('click', () => showStep(1));
 }
  async function goToStep2Listener() {
     console.log('goToStep2Listener called');
