@@ -1,9 +1,10 @@
 export function extractPersonalBests(htmlString) {
-    //jestli nezačíná na chyba
+    // Kontrola, zda stránka nezačíná "CHYBA:"
     if (htmlString.trim().startsWith("CHYBA:")) {
         console.error("Stránka obsahuje chybu: " + htmlString.trim());
         return [];
     }
+
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, 'text/html');
 
@@ -30,9 +31,16 @@ export function extractPersonalBests(htmlString) {
     const rows = table.querySelectorAll('tr');
     const personalBests = Array.from(rows).slice(1).map(row => {
         const cells = row.querySelectorAll('td');
-        if (cells.length >= 2) {
-            const discipline = cells[0]?.textContent?.trim();
+        if (cells.length >= 3) {
+            let discipline = cells[0]?.textContent?.trim();
             const result = cells[1]?.textContent?.trim();
+            const dh = cells[2]?.textContent?.trim().toLowerCase();
+
+            // Přidání (h) k disciplíně, pokud D/H obsahuje "h"
+            if (dh === 'h') {
+                discipline += " (h)";
+            }
+
             return { discipline, result };
         }
         return null;
