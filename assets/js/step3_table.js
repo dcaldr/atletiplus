@@ -53,9 +53,11 @@ export function clearStep3Results() {
 }
 
 function checkEan(athlete) {
-    // if its number and  fits this 10000025523
-    return(athlete.ean.match(/^\d+$/) && athlete.ean.length === 11);
-
+    if (!athlete.ean || typeof athlete.ean !== 'string') {
+        console.error('Invalid EAN:', athlete.ean);
+        return false;
+    }
+    return athlete.ean.match(/^\d+$/) && athlete.ean.length === 11;
 }
 
 /**
