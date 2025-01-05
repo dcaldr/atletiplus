@@ -22,14 +22,14 @@ export function extractPersonalBests(htmlString) {
 
     if (!personalBestPanel) {
         console.warn('Sekce "Osobní maxima" nebyla nalezena.');
-        false;
+       return  false;
     }
 
     // Najde tabulku uvnitř tohoto panelu
     const table = personalBestPanel.querySelector('table.table-striped');
     if (!table) {
         console.warn('Tabulka "Osobní maxima" nebyla nalezena.');
-        false;
+       return  false;
     }
 
     // Extrahuje data z tabulky
