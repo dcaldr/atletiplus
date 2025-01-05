@@ -26,15 +26,17 @@ export async function initializeStep3() {
         console.error('initializeStep3: year out of range');
         return false;
     }
-
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    loadingSpinner.classList.remove('d-none');
     selectedAthletes = getSelectedAthletes();
-    const result = await resultsToAthletes(selectedAthletes); // bacha bez toho awaitu to selže
+    const result = await resultsToAthletes(selectedAthletes); // bacha bez toho awaitu to selže // šlo by celý streamlinoat jako append tabulky ale to je blbý
     console.log('result', result);
     if (!result) {
         console.error('initializeStep3: error in resultsToAthletes');
         return false;
     }
     const tableHTMLDefinition = createResultsTable(finishedAthletes);
+    loadingSpinner.classList.add('d-none');
     addExportListener();
    // console.log('tableHTMLDefinition', tableHTMLDefinition);
     insertTable(tableHTMLDefinition);
@@ -121,6 +123,7 @@ async function prepareAthleteResults(selectedYear, ean) {
  * vstupní fce do překláadání výsledků na atlety
  * @param athleteList
  * @returns {boolean}
+ * Bacha funkce zároveň edituje HTML element loadingStatus -- nevím jak to napsat hezčeji
  */
 async function resultsToAthletes(athleteList) {
     console.log('resultsToAthletes called');
@@ -128,31 +131,34 @@ async function resultsToAthletes(athleteList) {
         console.warn('resultsToAthletes: no athletes');
         return false;
     }
-    // console.log('selectedAthletes', selectedAthletes);
-    // console.log('selectedYear', selectedYear);
+    const loadingStatus = document.getElementById('loadingStatus'); // asi zlepšit přesnost pro rychlost??
+    loadingStatus.classList.remove('d-none');
 
-    for (let athlete of athleteList) {
-        // check ean and year
+    function updateLoadingStatus(remaining) {
+        loadingStatus.textContent = `zbývá: ${remaining}`;
+    }
+
+    for (let i = 0; i < athleteList.length; i++) {
+        const athlete = athleteList[i];
         checkEan(athlete);
-        // if good get results for it
+
         let finishedResults = await prepareAthleteResults(selectedYear, athlete.ean);
-      //  console.log('finishedResults', finishedResults);
         if (finishedResults === false) {
             console.error('resultsToAthletes: error getting results');
             return false;
         }
 
         for (let result of finishedResults) {
-          //  console.log('result', result);
             const { discipline, result: performance } = result;
             athlete.addDiscipline(discipline, performance);
         }
         finishedAthletes.push(athlete);
 
+        updateLoadingStatus(athleteList.length - i - 1);
     }
+
+    loadingStatus.classList.add('d-none');
     return true;
-
-
 }
 
 ////TABULKA

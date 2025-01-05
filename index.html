@@ -157,12 +157,21 @@
 
   <!-- Krok 3: Generování tabulky --> <!-- ta takhle asi funguje nejlíp -->
   <section id="step3" class="step d-none flex-grow-1 d-flex flex-column">
-    <div class="card flex-grow-1 d-flex flex-column h-100">
+    <div class="card flex-grow-1 d-flex flex-column h-100 position-relative">
       <div class="card-header">
         <h2>Krok 3: Generování tabulky</h2>
       </div>
-      <div class="card-body p-0 d-flex flex-column flex-grow-1 overflow-auto">
-        <div class="table-responsive ">
+      <div class="card-body p-0 d-flex flex-column flex-grow-1 overflow-auto position-relative">
+        <div id="loadingSpinner" class="d-none position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center" style="background: rgba(255, 255, 255, 0.8); z-index: 10;">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Načítání...</span> <!-- i asistivně :D -->
+          </div>
+          <div class="mt-3">
+            <span >Prosím čekejte, načítám data...</span>
+            <span class="d-none" id="loadingStatus">zbývá: </span>
+          </div>
+        </div>
+        <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover" id="resultsTable">
             <thead class="table-light">
             <tr>
@@ -195,7 +204,6 @@
             </tbody>
           </table>
         </div>
-
       </div>
       <div class="card-footer d-flex justify-content-between p-3 border-top bg-white">
         <button type="button" class="btn btn-secondary" id="prevStep3">Zpět</button>
@@ -203,6 +211,7 @@
       </div>
     </div>
   </section>
+
 
 
 
