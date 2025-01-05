@@ -11,7 +11,7 @@ let currentStep = 0;
 
 import {getCheckedAthletes, initializeStep2, validateSelection} from "./step2_selection.js";
 import {testParser} from "./parsers/parseResults.js";
-import {initializeStep3, verifyPhpResults} from "./step3_table.js";
+import {clearStep3Results, initializeStep3, verifyPhpResults} from "./step3_table.js";
 import { verifyPhpScript, verifyPhpInputs } from './step1_input.js';
 import { generateYearOptions, firstStepFormChecker } from './step1_input.js';
 
@@ -41,7 +41,11 @@ function addBasicListeners() {
     document.querySelector('#nextStep1').addEventListener('click', goToStep2Listener);
     document.querySelector('#nextStep2').addEventListener('click', goToStep3Listener);
     document.querySelector('#prevStep2').addEventListener('click', () => showStep(0));
-    document.querySelector('#prevStep3').addEventListener('click', () => showStep(1));
+    document.querySelector('#prevStep3').addEventListener('click', () => {
+        clearStep3Results();
+        showStep(1);
+    });
+
 }
  async function goToStep2Listener() {
     console.log('goToStep2Listener called');

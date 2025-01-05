@@ -33,7 +33,7 @@ export async function initializeStep3() {
         return false;
     }
     const tableHTMLDefinition = createResultsTable(finishedAthletes);
-    console.log('tableHTMLDefinition', tableHTMLDefinition);
+   // console.log('tableHTMLDefinition', tableHTMLDefinition);
     insertTable(tableHTMLDefinition);
     return result;
 
@@ -42,6 +42,11 @@ export async function initializeStep3() {
 
 export function setStep3Year(year){
     selectedYear = year;
+}
+export function clearStep3Results() {
+    const tableContainer = document.querySelector('#step3 #resultsTable');
+    tableContainer.innerHTML = '';
+    finishedAthletes = [];
 }
 
 function checkEan(athlete) {

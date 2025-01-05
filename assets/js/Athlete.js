@@ -1,5 +1,5 @@
 let allAtleti = [];
-let selectedAthlets = [];
+let selectedAthlets1 = [];
 let selectedYear = null;
 
 /**
@@ -40,10 +40,12 @@ toFirstTable(year) {
 
 
 }
-export function sendToAthletes(selectedAthletes) {
-    const athletesArray = selectedAthletes.map(athlete => {
+export function sendToAthletes(checkboxedAthletes) {
+    console.log('sendToAthletes called');
+    console.log('selectedAthlets1', selectedAthlets1.length);
+    const athletesArray = checkboxedAthletes.map(athlete => {
         return new Atlet(
-            null, // Assuming teamID is not provided in the selectedAthletes data
+            null, // Assuming teamID is not provided in the checkboxedAthletes data
             athlete.ean,
             athlete.fullname,
             athlete.birthyear,
@@ -52,7 +54,7 @@ export function sendToAthletes(selectedAthletes) {
             athlete.category,
         );
     });
-    selectedAthlets = athletesArray;
+    selectedAthlets1 = athletesArray;
     return athletesArray;
 }
 function guessAgeCategory(birthYearTwoDigits, referenceYear) {
@@ -163,6 +165,6 @@ function getTableRows(key = 'fullname') {
  */
 export function getSelectedAthletes() {
     console.log('getSelectedAthletes called');
-   // console.log('selectedAthlets', selectedAthlets);
-    return selectedAthlets;
+   // console.log('selectedAthlets1', selectedAthlets1);
+    return selectedAthlets1;
 }
