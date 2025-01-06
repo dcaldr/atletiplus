@@ -36,6 +36,11 @@ export function  validateSearchResults(inJson) {
         // });
 
         // Validate each item in the data array
+        if (!Array.isArray(json.data) || json.data.length === 0) {
+            console.error('Data is not an array or is empty');
+            return false;
+
+        }
         for (const item of json.data) {
             if (!keysInObject(item, requiredDataKeys)) {
                 return false;

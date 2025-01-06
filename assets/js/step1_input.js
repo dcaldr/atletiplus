@@ -196,8 +196,32 @@ async function searchPlease(year, query) {
     console.log('searchPlease called');
    const jsonData= await getSearchData(year, query);
   // console.log('jsondata:', typeof jsonData);
-   return   setSearchResults(jsonData, year);
+   const isSearchOk=   setSearchResults(jsonData, year);
+   if(!isSearchOk){
+       console.error('searchPlease: error in setSearchResults');
+       showNoResultAlert();
+       return false;
+   }
+   return true;
+
 }
+function showNoResultAlert() {
+    const alertPlaceholder = document.querySelector('#alertPlaceholderStep1');
+    const alert = document.createElement('div');
+    alert.className = 'alert alert-warning alert-dismissible fade show';
+    alert.role = 'alert';
+    alert.innerHTML = `
+        <span>Nebyly nalezeny žádné výledky - zkuste jiný dotaz</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    alertPlaceholder.appendChild(alert);
+
+    // Remove alert when closed
+    alert.querySelector('.btn-close').addEventListener('click', () => {
+        alert.remove();
+    });
+}
+
 
 /**
  * Získá data z hledání a vrátí json?
@@ -223,6 +247,7 @@ function getSearchData(yearC, queryC){
         .then(data => {
           //  console.log('Response:', data);
             console.log('Response getSearchData end:', typeof data);
+            console.log('Response getSearchData end:', data);
             return data;
         })
         .catch(error => {
