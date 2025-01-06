@@ -107,9 +107,9 @@ export function validateSelection() {
 
     if (!isSelected) {
     const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
-    if (!alertPlaceholder.querySelector('.alert')) {
+    if (!alertPlaceholder.querySelector('.alert-step2')) {
         const alert = document.createElement('div');
-        alert.className = 'alert alert-danger alert-dismissible fade show';
+        alert.className = 'alert alert-danger alert-dismissible fade show alert-step2';
         alert.role = 'alert';
         alert.innerHTML = `
             <span>Vyberte alespoň jednoho atleta.</span>
@@ -204,12 +204,12 @@ function sortListener() {
             icon.classList.remove('bi-arrow-up');
         }
 
-        // Add click event listener
+
         button.addEventListener('click', function (event) {
-            // Prevent default button behavior
+
             event.preventDefault();
 
-            // Toggle sort order
+            // sort
             const currentOrder = this.getAttribute('data-order');
             const newOrder = currentOrder === 'asc' ? 'desc' : 'asc';
             this.setAttribute('data-order', newOrder);
@@ -224,7 +224,7 @@ function sortListener() {
             }
 
             // Get the column index to sort by
-            const columnIndex = index + 1; // Adjust for the checkbox column
+            const columnIndex = index +1 ; // Adjust for the checkbox column
 
             // Call the reorderTable function to sort the table
             reorderTable(columnIndex, newOrder);
@@ -255,9 +255,9 @@ function mainCheckboxListener() {
     function handleShortPress() {
         if (!notificationShown) {
             const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
-            if (!alertPlaceholder.querySelector('.alert-warning')) {
+            if (!alertPlaceholder.querySelector('.warning-step2')) {
                 const alert = document.createElement('div');
-                alert.className = 'alert alert-warning alert-dismissible fade show';
+                alert.className = 'alert alert-warning alert-dismissible fade show warning-step2';
                 alert.role = 'alert';
                 alert.innerHTML = `
             <span>Pro o(d)značení podržte déle - dokud se tlačítka nezmění</span>
