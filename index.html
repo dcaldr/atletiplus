@@ -18,6 +18,19 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicon/apple-touch-icon.png" />
   <link rel="manifest" href="assets/img/favicon/site.webmanifest" />
 
+  <style>
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+
   <title>Atleti+</title>
 
 </head>
@@ -29,6 +42,10 @@
 
 <div class="container my-auto">
   <h1 class="text-center mb-4">Atleti+</h1>
+  <div id="jsWarning" style=" text-align: center; opacity: 0; transform: scale(0); animation: popIn 0.1s forwards 3s;">
+    <img src="assets/img/javascript.png" alt="rozhodně logo JavaScriptu" style="width: 300px; height: 200px;">
+    <p>JavaScript není povolen, nebo se něco rozbilo- Nepokračujte prosím dále.</p>
+  </div>
 
   <!-- Krok 1: Zadání oddílu a sezóny -->
   <section id="step1" class="step active  h-100">

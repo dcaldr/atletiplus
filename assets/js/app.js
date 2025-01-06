@@ -35,6 +35,11 @@ function showStep(index) {
     history.pushState({step: index}, `Krok ${index}`, `#step${index + 1}`);
 }
 
+
+function yesJavascript() {
+    document.querySelector('#jsWarning').classList.add('d-none');
+}
+
 /**
  * připnutí základních tlačítek
  */
@@ -94,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeSteps();
     // first step
     generateYearOptions();
+    yesJavascript();
     showStep(0); // pro jistotu
     addBasicListeners();
     history.replaceState({ step: 0 }, 'Step 1', '#step1');
