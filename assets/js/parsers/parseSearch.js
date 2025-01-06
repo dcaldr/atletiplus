@@ -7,12 +7,12 @@
  * todo: zpracování chyb. zpráv z API
  */
 export function  validateSearchResults(inJson) {
-    console.log('validateSearchResults called');
+    console.debug('validateSearchResults called');
      // tady možná nebude sedět
   const json = inJson;
     try {
      //  const json = JSON.parse(inJson.toString());
-       console.warn(typeof json);
+       console.debug(typeof json);
         const requiredKeys = ['sEcho', 'draw', 'recordsTotal', 'recordsFiltered', 'data'];
         const requiredDataKeys = ['TeamID', 'EAN', 'Fullname', 'Birthdate', 'Registered', 'Teamname'];
 
@@ -21,7 +21,7 @@ export function  validateSearchResults(inJson) {
             return false;
         }
 
-        console.log('All Main keys are present in the correct order');
+        console.debug('All Main keys are present in the correct order');
 
         //  all keys in the JSON object
         // jsonKeys.forEach(key => {
@@ -47,7 +47,7 @@ export function  validateSearchResults(inJson) {
             }
         }
 
-        console.log('All data items have the required keys');
+        console.debug('All data items have the required keys');
         return true;
     } catch (error) {
         console.error('Error validating search results:', error);

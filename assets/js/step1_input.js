@@ -180,7 +180,7 @@ function validateFormInput() {
 
     if (!form.checkValidity()) {
         form.reportValidity();
-        console.error('něco nevaliduje');
+        console.warn('něco nevaliduje');
         return false;
     } else {
         console.debug('vše je v pořádku');
