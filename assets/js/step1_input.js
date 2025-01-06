@@ -150,7 +150,7 @@ function validateFormInput() {
 
     // teamName
      if (!teamNamePattern.test(teamNameInput.value)) {
-    const invalidChars = teamNameInput.value.replace(teamNamePattern, ''); // odebere dobré znaky -> zbydou špatné
+   const invalidChars = teamNameInput.value.match(/[^\p{L}\p{N}\s\-]/gu) || []; // find invalid characters
     teamNameInput.setCustomValidity(`Název oddílu obsahuje nepovolené znaky: ${invalidChars}`);
     teamNameInput.classList.add('is-invalid');
     teamNameInput.classList.remove('is-valid');
