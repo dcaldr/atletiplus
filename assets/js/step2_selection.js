@@ -255,20 +255,22 @@ function mainCheckboxListener() {
     function handleShortPress() {
         if (!notificationShown) {
             const alertPlaceholder = document.querySelector('#step2 #alertPlaceholder');
-            const alert = document.createElement('div');
-            alert.className = 'alert alert-warning alert-dismissible fade show';
-            alert.role = 'alert';
-            alert.innerHTML = `
-                <span>Pro o(d)značení podržte déle - dokud se tlačítka nezmění</span>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            `;
-            alertPlaceholder.appendChild(alert);
-            notificationShown = true;
+            if (!alertPlaceholder.querySelector('.alert-warning')) {
+                const alert = document.createElement('div');
+                alert.className = 'alert alert-warning alert-dismissible fade show';
+                alert.role = 'alert';
+                alert.innerHTML = `
+            <span>Pro o(d)značení podržte déle - dokud se tlačítka nezmění</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+                alertPlaceholder.appendChild(alert);
+                notificationShown = true;
 
-            // Remove notification flag when alert is closed
-            alert.querySelector('.btn-close').addEventListener('click', () => {
-                notificationShown = false;
-            });
+                // Remove notification flag when alert is closed
+                alert.querySelector('.btn-close').addEventListener('click', () => {
+                    notificationShown = false;
+                });
+            }
         }
     }
 
