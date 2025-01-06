@@ -18,7 +18,7 @@ export function verifyPhpScript() {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Response:', data);
+        console.debug('Response:', data);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -51,10 +51,10 @@ export function verifyPhpInputs(testquery = "UJPR9", testYear = 2024) {
             console.error('Error:', data.error);
             return false;
         } else if (data.ok) {
-            console.log('OK:', data.ok);
+            console.debug('OK:', data.ok);
             return true;
         } else {
-            console.log('Response:', data);
+            console.debug('Response:', data);
             return false;
         }
     })
@@ -113,7 +113,7 @@ export function generateYearOptions() {
  * @returns {boolean} pokud je vše v pořádku pro pokračování na další krok
  */
 export async function firstStepFormChecker() {
-    console.log('firstStepForm called');
+    console.debug('firstStepForm called');
     // event.preventDefault(); //todo:recheck
     if (!validateFormInput()) {
         console.error('validateFormInput failed');
@@ -133,7 +133,7 @@ export async function firstStepFormChecker() {
  * @returns {boolean} pokud ok pokračovat
  */
 function validateFormInput() {
-    console.log('validate form clicked');
+    console.debug('validate form clicked');
     const form = document.querySelector('#step1 form');
     const teamNameInput = document.querySelector('#teamName');
     const seasonInput = document.querySelector('#season');
@@ -143,8 +143,8 @@ function validateFormInput() {
     const teamNamePattern = /^[\p{L}\p{N}\s\-]+$/u; // allow pattern - písmena čísla mezery pomlčky <- "ve všech jazicích" /u - unicode
 
     // vstup
-    console.log('oddíl:', teamNameInput.value);
-    console.log('sezóna:', seasonValue);
+    console.debug('oddíl:', teamNameInput.value);
+    console.debug('sezóna:', seasonValue);
 
     let errors = [];
 
@@ -183,7 +183,7 @@ function validateFormInput() {
         console.error('něco nevaliduje');
         return false;
     } else {
-        console.log('vše je v pořádku');
+        console.debug('vše je v pořádku');
         return true;
     }
 }
@@ -193,7 +193,7 @@ function validateFormInput() {
  * Vyvolá hledání, provede až po js kontrole vstupu (php dělá vlastní kontrolu)
  */
 async function searchPlease(year, query) {
-    console.log('searchPlease called');
+    console.debug('searchPlease called');
    const jsonData= await getSearchData(year, query);
   // console.log('jsondata:', typeof jsonData);
    const isSearchOk=   setSearchResults(jsonData, year);
@@ -230,7 +230,7 @@ function showNoResultAlert() {
  * * @returns {Promise<Object | null>} json data nebo null v případě chyby
  */
 function getSearchData(yearC, queryC){
-    console.log('getSearchData called');
+    console.debug('getSearchData called');
     const url = 'backend/search.php';
     const data = new URLSearchParams(); // pero query to asi jde taky
     data.append('year', yearC.toString());
@@ -246,8 +246,8 @@ function getSearchData(yearC, queryC){
         .then(response => response.json()) //tady to už je json object
         .then(data => {
           //  console.log('Response:', data);
-            console.log('Response getSearchData end:', typeof data);
-            console.log('Response getSearchData end:', data);
+           // console.log('Response getSearchData end:', typeof data);
+           // console.log('Response getSearchData end:', data);
             return data;
         })
         .catch(error => {

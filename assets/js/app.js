@@ -64,11 +64,11 @@ function addBasicListeners() {
 
 }
  async function goToStep2Listener() {
-    console.log('goToStep2Listener called');
+    console.debug('goToStep2Listener called');
      let [aa] = await Promise.all([firstStepFormChecker()]);
-    console.log('aa', aa);
+  //  console.log('aa', aa);
     if ( aa ) {
-        console.log('firstStepFormChecker passed');
+      //  console.log('firstStepFormChecker passed');
         initializeStep2();
         showStep(1);
 
@@ -78,13 +78,13 @@ function addBasicListeners() {
     }
 }
  function goToStep3Listener(){
-    console.log('goToStep3Listener called');
+    console.debug('goToStep3Listener called');
     // let [aa] = await Promise.all([validateSelection()]);
     if(!validateSelection()) {
         console.error('Chyba v validaci goToStep3 kroku');
         return false;
     }
-    console.log('validateSelection passed');
+   // console.log('validateSelection passed');
     getCheckedAthletes();
     initializeStep3();
     showStep(2);

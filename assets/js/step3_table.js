@@ -21,7 +21,7 @@ let finishedAthletes = [];
  * @returns {boolean}
  */
 export async function initializeStep3() {
-    console.log('initializeStep3 called');
+    console.debug('initializeStep3 called');
     if (selectedYear < 2003 || selectedYear > new Date().getFullYear()) {
         console.error('initializeStep3: year out of range');
         return false;
@@ -30,7 +30,7 @@ export async function initializeStep3() {
     loadingSpinner.classList.remove('d-none');
     selectedAthletes = getSelectedAthletes();
     const result = await resultsToAthletes(selectedAthletes); // bacha bez toho awaitu to selže // šlo by celý streamlinoat jako append tabulky ale to je blbý
-    console.log('result', result);
+    //console.debug('result', result);
     if (!result) {
         console.error('initializeStep3: error in resultsToAthletes');
         return false;
@@ -93,7 +93,7 @@ function checkEan(athlete) {
  * možná promise !!!
  */
 async function prepareAthleteResults(selectedYear, ean) {
-    console.log('prepareAthleteResults called');
+    console.debug('prepareAthleteResults called');
    // console.log('selectedYear', selectedYear, 'ean', ean);
  if(selectedYear === null || selectedYear === undefined){
         console.error('prepareAthleteResults: selectedYear null or undefined');
@@ -126,7 +126,7 @@ async function prepareAthleteResults(selectedYear, ean) {
  * Bacha funkce zároveň edituje HTML element loadingStatus -- nevím jak to napsat hezčeji
  */
 async function resultsToAthletes(athleteList) {
-    console.log('resultsToAthletes called');
+    console.debug('resultsToAthletes called');
     if (athleteList.length === 0) {
         console.warn('resultsToAthletes: no athletes');
         return false;
@@ -168,8 +168,8 @@ async function resultsToAthletes(athleteList) {
  * @returns {string} "html" tabulka
  */
 function createResultsTable(athletes) {
-    console.log('createResultsTable called');
-    console.log('athletes', athletes);
+    console.debug('createResultsTable called');
+    console.debug('athletes', athletes);
     // Pokud je pole atletů prázdné, inicializovat prázdné disciplíny
     const disciplines = athletes.length > 0
         ? [...new Set(athletes.flatMap(atlet => atlet.disciplines.map(d => d.discipline)))]
@@ -233,7 +233,7 @@ function insertTable(tableHTMLDefinition) {
     tableContainer.innerHTML = tableHTMLDefinition;
 }
  function exportTableXLSX() {
-    console.log('exportTableXLSX called');
+    console.debug('exportTableXLSX called');
     const table = document.querySelector('#step3 #resultsTable');
 
     let downloadFile = XLSX.utils.table_to_book(table,{raw: true});
@@ -254,10 +254,9 @@ function addExportListener() {
 }
 
 
-
-
-
-
+/**
+ * debug function
+ */
 export function verifyPhpResults() {
     const eanList = [
         '10000187461',

@@ -15,7 +15,7 @@ let tableData = null;
  *
  */
 export function setSearchResults(json, year) {
-    console.log('setSearchResults called');
+    console.debug('setSearchResults called');
     if(json === null) {
         console.error('Null v searchResults json');
         return false;
@@ -26,15 +26,15 @@ export function setSearchResults(json, year) {
     }
     //todo: zkontroloat jestli odpovídá formátu
     let parseStatus;
-    console.log('první json');
-    console.log( json);
+    console.debug('první json');
+    console.debug( json);
      parseStatus = validateSearchResults(json);
-     console.log('parseStatus po validate:', parseStatus);
-     console.log('json po validate:', json);
+    // console.log('parseStatus po validate:', parseStatus);
+    // console.log('json po validate:', json);
      if(parseStatus) {
          inJson = json;
          selectedYear = year;
-         console.log('----json je v pořádku*-- na konci');
+         console.debug('----json je v pořádku*-- na konci');
          tableData = manageAthletes(json,selectedYear);
          return true;
 
@@ -48,7 +48,7 @@ export function setSearchResults(json, year) {
  * @returns {boolean}
  */
 export function initializeStep2(){
-    console.log('initData called');
+    console.debug('initData called');
     if(inJson === null){
         console.error('initData: inJson  null');
         return false;
@@ -71,7 +71,7 @@ export function initializeStep2(){
  * @returns {*[]}
  */
 export function getCheckedAthletes() {
-    console.log('getCheckedAthletes called');
+    console.debug('getCheckedAthletes called');
     const selectedAthletes = [];
     const checkboxes = document.querySelectorAll('#step2 input[type="checkbox"]:checked');
     checkboxes.forEach(checkbox => {
@@ -84,7 +84,7 @@ export function getCheckedAthletes() {
             category: checkbox.getAttribute('data-category'),
         });
     });
-    console.log('checkedAthletes', selectedAthletes);
+    console.debug('checkedAthletes', selectedAthletes);
     sendToAthletes(selectedAthletes);
     setStep3Year(selectedYear);
 
@@ -145,7 +145,7 @@ function putTableRows(tableData) {
  * @param newOrder
  */
 function reorderTable(columnIndex, newOrder) {
-    console.log('reorderTable called');
+    console.debug('reorderTable called');
     // Get all table rows
     const table = document.querySelector('#selectAthletes');
     //console.log('table', table);

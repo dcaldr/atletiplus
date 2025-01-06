@@ -41,8 +41,8 @@ toFirstTable(year) {
 
 }
 export function sendToAthletes(checkboxedAthletes) {
-    console.log('sendToAthletes called');
-    console.log('selectedAthlets1', selectedAthlets1.length);
+    console.debug('sendToAthletes called');
+    console.debug('selectedAthlets1', selectedAthlets1.length);
     const athletesArray = checkboxedAthletes.map(athlete => {
         return new Atlet(
             null, // Assuming teamID is not provided in the checkboxedAthletes data
@@ -121,8 +121,8 @@ function sortAtleti(atleti, key, order = 'asc') {
  * @returns {Object[]} pole objektů Atlet
  */
 function transformJsonToAtleti(jsonData) {
-    console.log('transformJsonToAtleti called');
-    console.log('jsonData', jsonData);
+    console.debug('transformJsonToAtleti called');
+    console.debug('jsonData', jsonData);
     const atleti = [];
     const data = jsonData.data; // Access the data key
     for (let i = 0; i < data.length; i++) {
@@ -140,9 +140,9 @@ function transformJsonToAtleti(jsonData) {
     return atleti;
 }
 export function manageAthletes(jsonData, year) {
-    console.log('manageAthletes called');
+    console.debug('manageAthletes called');
     allAtleti = transformJsonToAtleti(jsonData);
-    console.log('allAtleti', allAtleti);
+   // console.log('allAtleti', allAtleti);
     selectedYear = year;
     // const table = document.querySelector('#step2 table tbody');
     // table.innerHTML = '';
@@ -169,7 +169,7 @@ function getTableRows(key = 'fullname') {
  * @returns {*[]}
  */
 export function getSelectedAthletes() {
-    console.log('getSelectedAthletes called');
+    console.debug('getSelectedAthletes called');
    // console.log('selectedAthlets1', selectedAthlets1);
     return selectedAthlets1;
 }
