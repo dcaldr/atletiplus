@@ -102,22 +102,22 @@ document.addEventListener('DOMContentLoaded', () => {
     window.verifyPhpResults = verifyPhpResults;
     window.testParser = testParser;
     // put ujpr9 to nazev oddílu and 2024 to season
-     document.querySelector('#teamName').value = 'ujpr9';
-     document.querySelector('#season').value = '2024';
-     // buttonpress
-        document.querySelector('#nextStep1').click();
-        console.log('nextStep2 clicked');
-        // wait
-   // document.querySelector('#nextStep2').click();
-    // click all rows buttons
-setTimeout(() => {
-    const checkboxes = document.querySelectorAll('#step2 tbody input[type="checkbox"]');
-    if (checkboxes.length >= 4) {
-        checkboxes.forEach(checkbox => checkbox.click());
-    } else {
-        console.error('Less than 4 checkboxes found');
-    }
-}, 500); // Adjust the timeout as needed
+//      document.querySelector('#teamName').value = 'ujpr9';
+//      document.querySelector('#season').value = '2024';
+//      // buttonpress
+//         document.querySelector('#nextStep1').click();
+//         console.log('nextStep2 clicked');
+//         // wait
+//    // document.querySelector('#nextStep2').click();
+//     // click all rows buttons
+// setTimeout(() => {
+//     const checkboxes = document.querySelectorAll('#step2 tbody input[type="checkbox"]');
+//     if (checkboxes.length >= 4) {
+//         checkboxes.forEach(checkbox => checkbox.click());
+//     } else {
+//         console.error('Less than 4 checkboxes found');
+//     }
+// }, 500); // Adjust the timeout as needed
 
 
 
