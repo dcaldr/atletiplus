@@ -60,7 +60,7 @@ $postData = http_build_query([
     'columns[3][searchable]' => 'true',
     'columns[3][orderable]' => 'false',
     'start' => 0,
-    'length' => 100, //počet výsledků dukla má cca 730 atletů (todo: vymyslet zvýšení, do produkce)
+    'length' => 200, //počet výsledků dukla má cca 730 atletů (todo: vymyslet zvýšení, do produkce)
     'season' => $year,
     'fulltext' => $query,
 ]);
